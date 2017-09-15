@@ -1,0 +1,21 @@
+! Bang Tidy Games
+! Map 2
+
+
+                                     ro
+        s                           488i
+       4888i
+                    m qn   o
+mpj                4888888888i
+888i                                   4
+
+             krn           4888i
+            48888i
+k
+e3jq      lo           n oql rn     norn
+66663aaae66666666666666666666663aae66666
+ggggf7772ggggggggggggggggggggggf772ggggg
+! Number of Laps
+5
+! Robot start tile from top
+4

@@ -1,0 +1,20 @@
+! Bang Tidy Games
+! New scanner test
+! Number of Laps
+3
+! Map
+
+
+
+
+        s
+       488888888888i             m qn
+                                48888i
+
+
+
+                     r  n
+k                   e666663
+63jq        jpn  qr 2gggggf q         oe
+66663aaae66666666661hggggg9d6663aae66666
+ggggf7772ggggggggggggggggggggggf772ggggg

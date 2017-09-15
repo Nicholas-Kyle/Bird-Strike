@@ -1,0 +1,23 @@
+! Bang Tidy Games
+! Level 1 - Desert
+! # = Tile Legend
+! 5 = purple_tile_above
+! 8 = purpletiletop
+! 2 = purple_tile_bottom
+! 4 = purple_tile_below
+! 6 = GrassRight
+
+
+
+
+
+
+
+
+
+            222
+         222
+      222
+   222
+222
+2222222222222222222222222222222222222222
