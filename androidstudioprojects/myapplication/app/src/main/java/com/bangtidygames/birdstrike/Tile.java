@@ -100,12 +100,6 @@ public class Tile {
         } else if (type == 28) {
             this.tileYAdjust(40);
             tileImage = Assets.blueFinishPost;
-        } else if (type == 34) {
-            this.tileYAdjust(96);
-            tileImage = Assets.warp;
-        } else if (type == 35) {
-            this.tileYAdjust(96);
-            tileImage = Assets.warp2;
         } else {
             type = 0;
         }

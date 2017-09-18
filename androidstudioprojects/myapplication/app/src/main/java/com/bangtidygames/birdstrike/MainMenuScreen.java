@@ -1,6 +1,8 @@
 package com.bangtidygames.birdstrike;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.bangtidygames.framework.Game;
 import com.bangtidygames.framework.Graphics;
@@ -19,9 +21,11 @@ public class MainMenuScreen extends Screen {
     private int currentDrag;
     private int drag;
 
+    private Set<MenuLevelPosition> LevelPositions= new HashSet<>();
 
     public MainMenuScreen(Game game) {
         super(game);
+        this.setLevelPositions();
     }
 
     @Override
@@ -38,12 +42,6 @@ public class MainMenuScreen extends Screen {
                 } else {
                     currentDrag = drag-event.x;
                 }
-                //System.out.println(event.x);
-                System.out.println(x);
-
-
-
-
             }
 
             if (event.type == TouchEvent.TOUCH_UP) {
@@ -53,11 +51,13 @@ public class MainMenuScreen extends Screen {
                     // add system to adjust screen positions for future updates
                     // and to share screen positions with graphics for buttons
 
-                    if (inBounds(event, 88, 88, 300, 60)) {
-                        if (LoadSave.getHearts() != 0) {
-                            setSingleRace(2);
-                        } else {
-                            //TODO add you must wait x amount of time for hearts to reload
+                    for (MenuLevelPosition level : LevelPositions) {
+                        if (inBounds(event, level.getX() - x, level.getY(), 119, 150)) {
+                            if (LoadSave.getHearts() != 0) {
+                                selectLevel(2);
+                            } else {
+                                //TODO add you must wait x amount of time for hearts to reload
+                            }
                         }
                     }
                 } else {
@@ -87,8 +87,14 @@ public class MainMenuScreen extends Screen {
         int menuPos = x+currentDrag;
         if (menuPos > 0) {
             g.drawImage(Assets.menu_forest, (0-menuPos), 0);
+            for (MenuLevelPosition level : LevelPositions) {
+                g.drawImage(Assets.level_1, level.getX() - menuPos, level.getY());
+            }
         } else {
             g.drawImage(Assets.menu_forest, (0), 0);
+            for (MenuLevelPosition level : LevelPositions) {
+                g.drawImage(Assets.level_1, level.getX(), level.getY());
+            }
         }
         g.drawImage(Assets.menu_desert, (1280-menuPos), 0);
         g.drawImage(Assets.menu_forest, (2560-menuPos), 0);
@@ -96,8 +102,13 @@ public class MainMenuScreen extends Screen {
 
     }
 
-    private void setSingleRace(int level) {
+    private void selectLevel(int level) {
         game.setScreen(new GameScreen(game, level));
+    }
+
+    private void setLevelPositions() {
+        MenuLevelPosition level1 = new MenuLevelPosition(88, 88);
+        LevelPositions.add(level1);
     }
 
     @Override

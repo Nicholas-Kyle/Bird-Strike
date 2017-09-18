@@ -23,6 +23,8 @@ public class LoadingScreen extends Screen {
         Assets.menu_graveyard = g.newImage("MenuMap/graveyard.png", ImageFormat.RGB565);
         Assets.menu_snow = g.newImage("MenuMap/snow.png", ImageFormat.RGB565);
 
+        Assets.level_1 = g.newImage("MenuLevels/lvl1.png", ImageFormat.ARGB4444);
+
         Assets.BG_forest_1280 = g.newImage("grassTileset/BG_forest_1280.png", ImageFormat.RGB565);
 
         Assets.UI = g.newImage("RunningUI.png", ImageFormat.RGB565);
