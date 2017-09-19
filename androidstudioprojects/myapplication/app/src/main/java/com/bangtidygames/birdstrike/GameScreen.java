@@ -135,8 +135,32 @@ public class GameScreen extends Screen {
             levelManager.updateTiles();
             levelManager.updateBirds(deltaTime);
             levelManager.updateBackground();
-            // levelManager.updateLaps();
             if (levelManager.isLevelComplete()) {
+                if(LoadSave.getStars(levelManager.getLevel()) == 2) {
+                    if(robot.getBirdsHit() >= levelManager.getThreeStars()){
+                        LoadSave.addStars(levelManager.getLevel(), 3);
+                        LoadSave.saveStars(game.getFileIO());
+                    }
+                } else if(LoadSave.getStars(levelManager.getLevel()) == 1) {
+                    if(robot.getBirdsHit() >= levelManager.getThreeStars()){
+                        LoadSave.addStars(levelManager.getLevel(), 3);
+                        LoadSave.saveStars(game.getFileIO());
+                    } else if(robot.getBirdsHit() >= levelManager.getTwoStars()) {
+                        LoadSave.addStars(levelManager.getLevel(), 2);
+                        LoadSave.saveStars(game.getFileIO());
+                    }
+                } else if(LoadSave.getStars(levelManager.getLevel()) == 0) {
+                    if(robot.getBirdsHit() >= levelManager.getThreeStars()){
+                        LoadSave.addStars(levelManager.getLevel(), 3);
+                        LoadSave.saveStars(game.getFileIO());
+                    } else if(robot.getBirdsHit() >= levelManager.getTwoStars()) {
+                        LoadSave.addStars(levelManager.getLevel(), 2);
+                        LoadSave.saveStars(game.getFileIO());
+                    } else if(robot.getBirdsHit() >= levelManager.getOneStar()) {
+                        LoadSave.addStars(levelManager.getLevel(), 1);
+                        LoadSave.saveStars(game.getFileIO());
+                    }
+                }
                 state = GameState.Complete;
             }
         }
@@ -185,6 +209,7 @@ public class GameScreen extends Screen {
 
     private void updateComplete(List touchEvents) {
         int len = touchEvents.size();
+
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_DOWN) {

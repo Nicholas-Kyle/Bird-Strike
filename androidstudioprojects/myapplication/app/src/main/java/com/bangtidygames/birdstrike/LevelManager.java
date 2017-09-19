@@ -20,6 +20,12 @@ public class LevelManager {
 
     private int levelWidth;
 
+    private int level;
+
+    private int oneStar;
+    private int twoStars;
+    private int threeStars;
+
     private ArrayList tileArray = new ArrayList();
     private ArrayList compPlayerArray = new ArrayList();
     private ArrayList birdArray = new ArrayList();
@@ -37,6 +43,7 @@ public class LevelManager {
     public LevelManager(int level) {
 
         this.robot = GameScreen.getRobot();
+        this.setLevel(level);
         this.loadBackground(level);
         this.loadMap(level);
         this.loadBirds(level);
@@ -123,6 +130,7 @@ public class LevelManager {
 
     private void loadBirds(int level) {
         //Bird(int xPosition, int yPosition, int width, float speed)
+        //Takes care of stars
         if (level == 1) {
             Bird bird = new Bird(1000, 200, levelWidth, (float)1.36);
             birdArray.add(bird);
@@ -134,7 +142,9 @@ public class LevelManager {
             birdArray.add(bird4);
             Bird bird5 = new Bird(2400, 250, levelWidth, (float)1.36);
             birdArray.add(bird5);
-
+            this.oneStar=0;
+            this.twoStars=3;
+            this.threeStars=5;
         }
         if (level == 2) {
             Bird bird = new Bird(1400, 300, levelWidth, (float) 1.36);
@@ -147,6 +157,9 @@ public class LevelManager {
             birdArray.add(bird4);
             Bird bird5 = new Bird(3600, 350, levelWidth, (float) 1.36);
             birdArray.add(bird5);
+            this.oneStar=0;
+            this.twoStars=3;
+            this.threeStars=5;
         }
     }
 
@@ -355,5 +368,25 @@ public class LevelManager {
 
     public void setFinishPost(boolean finishPost) {
         this.finishPost = finishPost;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getOneStar() {
+        return oneStar;
+    }
+
+    public int getTwoStars() {
+        return twoStars;
+    }
+
+    public int getThreeStars() {
+        return threeStars;
     }
 }

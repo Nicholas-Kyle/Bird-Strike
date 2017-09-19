@@ -11,7 +11,6 @@ import com.bangtidygames.framework.Screen;
 
 public class LoadingScreen extends Screen {
     public LoadingScreen(Game game) {
-
         super(game);
     }
 
@@ -24,6 +23,15 @@ public class LoadingScreen extends Screen {
         Assets.menu_snow = g.newImage("MenuMap/snow.png", ImageFormat.RGB565);
 
         Assets.level_1 = g.newImage("MenuLevels/lvl1.png", ImageFormat.ARGB4444);
+        Assets.level_2 = g.newImage("MenuLevels/lvl2.png", ImageFormat.ARGB4444);
+        Assets.level_3 = g.newImage("MenuLevels/lvl3.png", ImageFormat.ARGB4444);
+        Assets.level_4 = g.newImage("MenuLevels/lvl4.png", ImageFormat.ARGB4444);
+        Assets.level_5 = g.newImage("MenuLevels/lvl5.png", ImageFormat.ARGB4444);
+        Assets.level_6 = g.newImage("MenuLevels/lvl6.png", ImageFormat.ARGB4444);
+
+        Assets.one_star = g.newImage("MenuLevels/oneStar.png", ImageFormat.ARGB4444);
+        Assets.two_stars = g.newImage("MenuLevels/twoStars.png", ImageFormat.ARGB4444);
+        Assets.three_stars = g.newImage("MenuLevels/threeStars.png", ImageFormat.ARGB4444);
 
         Assets.BG_forest_1280 = g.newImage("grassTileset/BG_forest_1280.png", ImageFormat.RGB565);
 
@@ -122,6 +130,7 @@ public class LoadingScreen extends Screen {
         Assets.grass_26 = g.newImage("grassTileset/26.png", ImageFormat.ARGB4444);
         Assets.grass_27 = g.newImage("grassTileset/27.png", ImageFormat.ARGB4444);
         LoadSave.load(game.getFileIO());
+        LoadSave.loadStars(game.getFileIO());
         LoadSave.loadHearts(game.getFileIO());
         //TODO remove next 2 lines, replace with check time elapsed in order to add hearts
         if (LoadSave.hearts<1){

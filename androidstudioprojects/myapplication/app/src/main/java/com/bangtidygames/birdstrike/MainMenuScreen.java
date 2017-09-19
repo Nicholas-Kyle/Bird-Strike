@@ -54,7 +54,7 @@ public class MainMenuScreen extends Screen {
                     for (MenuLevelPosition level : LevelPositions) {
                         if (inBounds(event, level.getX() - x, level.getY(), 119, 150)) {
                             if (LoadSave.getHearts() != 0) {
-                                selectLevel(2);
+                                selectLevel(level.getLevelNumber());
                             } else {
                                 //TODO add you must wait x amount of time for hearts to reload
                             }
@@ -89,14 +89,28 @@ public class MainMenuScreen extends Screen {
             g.drawImage(Assets.menu_forest, (0-menuPos), 0);
             for (MenuLevelPosition level : LevelPositions) {
                 g.drawImage(Assets.level_1, level.getX() - menuPos, level.getY());
+                if (LoadSave.stars[level.getLevelNumber()-1] == 1){
+                    g.drawImage(Assets.one_star, level.getX() - menuPos, level.getY());
+                } else if (LoadSave.stars[level.getLevelNumber()-1] == 2) {
+                    g.drawImage(Assets.two_stars, level.getX() - menuPos, level.getY());
+                } else if (LoadSave.stars[level.getLevelNumber()-1] == 3) {
+                    g.drawImage(Assets.three_stars, level.getX() - menuPos, level.getY());
+                }
             }
         } else {
             g.drawImage(Assets.menu_forest, (0), 0);
             for (MenuLevelPosition level : LevelPositions) {
                 g.drawImage(Assets.level_1, level.getX(), level.getY());
+                if (LoadSave.stars[level.getLevelNumber()-1] == 1){
+                    g.drawImage(Assets.one_star, level.getX(), level.getY());
+                } else if (LoadSave.stars[level.getLevelNumber()-1] == 2) {
+                    g.drawImage(Assets.two_stars, level.getX(), level.getY());
+                } else if (LoadSave.stars[level.getLevelNumber()-1] == 3) {
+                    g.drawImage(Assets.three_stars, level.getX(), level.getY());
+                }
             }
         }
-        g.drawImage(Assets.menu_desert, (1280-menuPos), 0);
+        g.drawImage(Assets.menu_forest, (1280-menuPos), 0);
         g.drawImage(Assets.menu_forest, (2560-menuPos), 0);
         g.drawImage(Assets.menu_forest, (3840-menuPos), 0);
 
@@ -107,8 +121,14 @@ public class MainMenuScreen extends Screen {
     }
 
     private void setLevelPositions() {
-        MenuLevelPosition level1 = new MenuLevelPosition(88, 88);
+        int x = 88;
+        int y = 88;
+        int gapX = 200;
+        int gapY = 150;
+        MenuLevelPosition level1 = new MenuLevelPosition(x, y, 1);
         LevelPositions.add(level1);
+        MenuLevelPosition level2 = new MenuLevelPosition((x+gapX*1), (y+gapY*1), 2);
+        LevelPositions.add(level2);
     }
 
     @Override
