@@ -33,6 +33,8 @@ public class LoadingScreen extends Screen {
         Assets.two_stars = g.newImage("MenuLevels/twoStars.png", ImageFormat.ARGB4444);
         Assets.three_stars = g.newImage("MenuLevels/threeStars.png", ImageFormat.ARGB4444);
 
+        Assets.setting = g.newImage("MenuLevels/settings.png", ImageFormat.ARGB4444);
+
         Assets.BG_forest_1280 = g.newImage("grassTileset/BG_forest_1280.png", ImageFormat.RGB565);
 
         Assets.UI = g.newImage("RunningUI.png", ImageFormat.RGB565);

@@ -22,11 +22,20 @@ public class MainMenuScreen extends Screen {
     private int currentDrag;
     private int drag;
 
+    private int settingsX = 15;
+    private int settingsY = 394;
+
     private Set<MenuLevelPosition> LevelPositions= new HashSet<>();
 
     public MainMenuScreen(Game game) {
         super(game);
         this.setLevelPositions();
+    }
+
+    public MainMenuScreen(Game game, int xPos) {
+        super(game);
+        this.setLevelPositions();
+        this.x=xPos;
     }
 
     @Override
@@ -55,6 +64,9 @@ public class MainMenuScreen extends Screen {
                                 //TODO add you must wait x amount of time for hearts to reload
                             }
                         }
+                    }
+                    if (inBounds(event, settingsX, settingsY, 70, 71)){
+                        game.setScreen(new SettingsScreen(game, x));
                     }
                 } else {
                     x += currentDrag;
@@ -135,7 +147,7 @@ public class MainMenuScreen extends Screen {
                     g.drawImage(Assets.three_stars, level.getX(), level.getY());
                 }
             }
-        } else if (menuPos > maxMenuX){
+        } else if (menuPos >= maxMenuX){
             g.drawImage(Assets.menu_forest, (0-maxMenuX), 0);
             g.drawImage(Assets.menu_forest, (1280-maxMenuX), 0);
             g.drawImage(Assets.menu_forest, (2560-maxMenuX), 0);
@@ -163,6 +175,7 @@ public class MainMenuScreen extends Screen {
                 }
             }
         }
+        g.drawImage(Assets.setting, settingsX, settingsY);
     }
 
     private void selectLevel(int level) {
@@ -171,20 +184,20 @@ public class MainMenuScreen extends Screen {
 
     private void setLevelPositions() {
         int x = 88;
-        int y = 88;
+        int y = 63;
         int gapX = 200;
-        int gapY = 150;
+        int gapY = 170;
         MenuLevelPosition level1 = new MenuLevelPosition(x, y, 1);
         LevelPositions.add(level1);
-        MenuLevelPosition level2 = new MenuLevelPosition((x+gapX*1), (y+gapY*1), 2);
+        MenuLevelPosition level2 = new MenuLevelPosition((x+gapX), (y+gapY), 2);
         LevelPositions.add(level2);
         MenuLevelPosition level3 = new MenuLevelPosition((x+gapX*2), y, 3);
         LevelPositions.add(level3);
-        MenuLevelPosition level4 = new MenuLevelPosition((x+gapX*3), (y+gapY*1), 4);
+        MenuLevelPosition level4 = new MenuLevelPosition((x+gapX*3), (y+gapY), 4);
         LevelPositions.add(level4);
         MenuLevelPosition level5 = new MenuLevelPosition((x+gapX*4), y, 5);
         LevelPositions.add(level5);
-        MenuLevelPosition level6 = new MenuLevelPosition((x+gapX*5), (y+gapY*1), 6);
+        MenuLevelPosition level6 = new MenuLevelPosition((x+gapX*5), (y+gapY), 6);
         LevelPositions.add(level6);
     }
 
@@ -205,6 +218,7 @@ public class MainMenuScreen extends Screen {
 
     @Override
     public void backButton() {
+        //TODO hide process?
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 
