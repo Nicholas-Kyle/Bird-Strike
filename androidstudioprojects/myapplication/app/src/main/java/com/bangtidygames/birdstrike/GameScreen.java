@@ -94,6 +94,7 @@ public class GameScreen extends Screen {
             if (crashTime == 0) {
                 crashTime = System.nanoTime();
                 currentSprite = Assets.explosion;
+                Assets.crash.play(0.60f);
             }
             if (System.nanoTime() > (crashTime + 250000000)) {
                 if (LoadSave.hearts != 0) {

@@ -179,6 +179,7 @@ public class MainMenuScreen extends Screen {
     }
 
     private void selectLevel(int level) {
+        Assets.crash = game.getAudio().createSound("SFX/explode.ogg");
         game.setScreen(new GameScreen(game, level));
     }
 

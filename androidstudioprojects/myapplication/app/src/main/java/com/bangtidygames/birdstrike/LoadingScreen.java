@@ -138,14 +138,7 @@ public class LoadingScreen extends Screen {
         if (LoadSave.hearts<1){
             LoadSave.setHearts(20);
         }
-
-
-        //This is how you would load a sound if you had one.
-        //Assets.click = game.getAudio().createSound("explode.ogg");
-
-
         game.setScreen(new MainMenuScreen(game));
-
     }
 
     @Override
