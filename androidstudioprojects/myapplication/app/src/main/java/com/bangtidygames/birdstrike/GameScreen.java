@@ -31,7 +31,18 @@ public class GameScreen extends Screen {
 
     private Image currentSprite;
 
-    Paint paint, paint2;
+    private int pauseXPos = 15;
+    private int pauseYPos = 394;
+    private int pauseUIResumeXPos = 250;
+    private int pauseUIResumeYPos = 50;
+    private int pauseUIRestartXPos = 250;
+    private int pauseUIRestartYPos = 180;
+    private int pauseUIMenuXPos = 250;
+    private int pauseUIMenuYPos = 310;
+
+    private Paint paint, paint2;
+
+    private boolean liftOnce;
 
     public GameScreen(Game game, int levelNumber) {
         super(game);
@@ -110,15 +121,19 @@ public class GameScreen extends Screen {
             for (int i = 0; i < len; i++) {
                 TouchEvent event = (TouchEvent) touchEvents.get(i);
                 if (event.type == TouchEvent.TOUCH_DOWN) {
-
-                    robot.moveUp();
+                    if (inBounds(event, pauseXPos, pauseYPos, 70, 70)) {
+                        this.liftOnce = false;
+                        this.pause();
+                    } else {
+                        robot.moveUp();
+                    }
                 }
 
                 if (event.type == TouchEvent.TOUCH_UP) {
-
                     robot.stopUp();
                 }
             }
+
 
             if (robot.isCaught()) {
                 state = GameState.GameOver;
@@ -137,27 +152,27 @@ public class GameScreen extends Screen {
             levelManager.updateBirds(deltaTime);
             levelManager.updateBackground();
             if (levelManager.isLevelComplete()) {
-                if(LoadSave.getStars(levelManager.getLevel()) == 2) {
-                    if(robot.getBirdsHit() >= levelManager.getThreeStars()){
+                if (LoadSave.getStars(levelManager.getLevel()) == 2) {
+                    if (robot.getBirdsHit() >= levelManager.getThreeStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 3);
                         LoadSave.saveStars(game.getFileIO());
                     }
-                } else if(LoadSave.getStars(levelManager.getLevel()) == 1) {
-                    if(robot.getBirdsHit() >= levelManager.getThreeStars()){
+                } else if (LoadSave.getStars(levelManager.getLevel()) == 1) {
+                    if (robot.getBirdsHit() >= levelManager.getThreeStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 3);
                         LoadSave.saveStars(game.getFileIO());
-                    } else if(robot.getBirdsHit() >= levelManager.getTwoStars()) {
+                    } else if (robot.getBirdsHit() >= levelManager.getTwoStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 2);
                         LoadSave.saveStars(game.getFileIO());
                     }
-                } else if(LoadSave.getStars(levelManager.getLevel()) == 0) {
-                    if(robot.getBirdsHit() >= levelManager.getThreeStars()){
+                } else if (LoadSave.getStars(levelManager.getLevel()) == 0) {
+                    if (robot.getBirdsHit() >= levelManager.getThreeStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 3);
                         LoadSave.saveStars(game.getFileIO());
-                    } else if(robot.getBirdsHit() >= levelManager.getTwoStars()) {
+                    } else if (robot.getBirdsHit() >= levelManager.getTwoStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 2);
                         LoadSave.saveStars(game.getFileIO());
-                    } else if(robot.getBirdsHit() >= levelManager.getOneStar()) {
+                    } else if (robot.getBirdsHit() >= levelManager.getOneStar()) {
                         LoadSave.addStars(levelManager.getLevel(), 1);
                         LoadSave.saveStars(game.getFileIO());
                     }
@@ -167,6 +182,7 @@ public class GameScreen extends Screen {
         }
     }
 
+
     private boolean inBounds(TouchEvent event, int x, int y, int width,
                              int height) {
         return (event.x > x && event.x < x + width - 1 && event.y > y
@@ -174,21 +190,26 @@ public class GameScreen extends Screen {
     }
 
     private void updatePaused(List touchEvents) {
+        int buttonWidth = 300;
+        int buttonHeight = 108;
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
-            if (event.type == TouchEvent.TOUCH_UP) {
-                if (inBounds(event, 0, 0, 800, 240)) {
-
-                    if (!inBounds(event, 0, 0, 35, 35)) {
-                        resume();
-                    }
-                }
-
-                if (inBounds(event, 0, 240, 800, 240)) {
+            if (event.type == TouchEvent.TOUCH_UP && liftOnce) {
+                if (inBounds(event, pauseUIResumeXPos, pauseUIResumeYPos, buttonWidth,
+                        buttonHeight)) {
+                    resume();
+                } else if (inBounds(event, pauseUIRestartXPos, pauseUIRestartYPos, buttonWidth,
+                        buttonHeight)) {
+                    nullify();
+                    restartLevel(levelManager.getLevel());
+                } else if (inBounds(event, pauseUIMenuXPos, pauseUIMenuYPos, buttonWidth,
+                        buttonHeight)) {
                     nullify();
                     goToMenu();
                 }
+            } else {
+                liftOnce = true;
             }
         }
     }
@@ -268,7 +289,7 @@ public class GameScreen extends Screen {
         paint = null;
         robot = null;
         currentSprite = null;
-
+//TODO add additional null as needed
         System.gc();
 
     }
@@ -291,20 +312,17 @@ public class GameScreen extends Screen {
             g.drawImage(HUD.getHearts(LoadSave.hearts), 0, 0);
             g.drawImage(HUD.getBirds(robot.getBirdsHit()), 0, 0);
             g.drawImage(HUD.getLaps(levelManager.getLap()), 0, 0);
+            g.drawImage(Assets.pause, pauseXPos, pauseYPos);
         }
-        //g.drawImage(Assets.UI, 0, 0, 0, 0, 0, 0);
-        //g.drawImage(Assets.button, 0, 350, 0, 65, 65, 65);
-        //g.drawImage(Assets.button, 0, 415, 0, 130, 65, 65);
-        //g.drawImage(Assets.button, 0, 0, 0, 195, 35, 35);
-
     }
 
     private void drawPausedUI() {
         Graphics g = game.getGraphics();
         // Darken the entire screen so you can display the Paused screen.
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Resume", 400, 165, paint2);
-        g.drawString("Menu", 400, 360, paint2);
+        g.drawImage(Assets.resumeButton, pauseUIResumeXPos, pauseUIResumeYPos);
+        g.drawImage(Assets.restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
+        g.drawImage(Assets.menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
 
     }
 
@@ -356,6 +374,11 @@ public class GameScreen extends Screen {
 
     private void goToMenu() {
         game.setScreen(new MainMenuScreen(game));
+    }
+
+    private void restartLevel(int level) {
+        Assets.crash = game.getAudio().createSound("SFX/explode.ogg");
+        game.setScreen(new GameScreen(game, level));
     }
 
     public static Robot getRobot() {

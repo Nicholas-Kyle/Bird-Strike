@@ -14,7 +14,7 @@ public class Assets {
 
     public static Image splash, menu_desert, menu_forest, menu_graveyard, menu_snow;
     public static Image level_1, level_2, level_3, level_4, level_5, level_6;
-    public static Image setting;
+    public static Image setting, pause, menuButton, restartButton, resumeButton;
     public static Image one_star, two_stars, three_stars;
     public static Image bluebiplane, explosion;
     public static Image brown_1, brown_2, brown_3, brown_4, brown_5, brown_6, brown_7, brown_8, brown_9,
