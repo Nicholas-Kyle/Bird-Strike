@@ -146,6 +146,10 @@ public class LoadingScreen extends Screen {
         Assets.grass_25 = g.newImage("grassTileset/25.png", ImageFormat.ARGB4444);
         Assets.grass_26 = g.newImage("grassTileset/26.png", ImageFormat.ARGB4444);
         Assets.grass_27 = g.newImage("grassTileset/27.png", ImageFormat.ARGB4444);
+
+        Assets.crash = game.getAudio().createSound("SFX/explode.ogg");
+        Assets.birdSound = game.getAudio().createSound("SFX/bird.ogg");
+
         LoadSave.load(game.getFileIO());
         LoadSave.loadStars(game.getFileIO());
         LoadSave.loadHearts(game.getFileIO());

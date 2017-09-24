@@ -174,7 +174,6 @@ public class GameScreen extends Screen {
         }
     }
 
-
     private boolean inBounds(TouchEvent event, int x, int y, int width,
                              int height) {
         return (event.x > x && event.x < x + width - 1 && event.y > y
@@ -359,7 +358,6 @@ public class GameScreen extends Screen {
     }
 
     private void restartLevel(int level) {
-        Assets.crash = game.getAudio().createSound("SFX/explode.ogg");
         game.setScreen(new GameScreen(game, level));
     }
 
@@ -370,4 +368,5 @@ public class GameScreen extends Screen {
     public static LevelManager getLevelManager() {
         return levelManager;
     }
+
 }

@@ -249,7 +249,6 @@ public class LevelManager {
             }
         }
         birdAnim.update(10);
-
     }
 
     public void paintBackground(Graphics g) {
