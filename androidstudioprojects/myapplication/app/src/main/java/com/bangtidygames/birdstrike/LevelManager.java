@@ -14,7 +14,7 @@ public class LevelManager {
 
     private int remainingOpponents;
 
-    private int lap;
+    private int checkpoints;
     private boolean finishPost = true;
     private boolean levelComplete = false;
 
@@ -27,7 +27,6 @@ public class LevelManager {
     private int threeStars;
 
     private ArrayList tileArray = new ArrayList();
-    private ArrayList compPlayerArray = new ArrayList();
     private ArrayList birdArray = new ArrayList();
 
     private Image bgImage;
@@ -112,7 +111,7 @@ public class LevelManager {
             String line = (String) lines.get(j);
             if (j == 15) {
                 char ch = line.charAt(0);
-                this.lap = Character.getNumericValue(ch);
+                this.checkpoints = Character.getNumericValue(ch);
             } else if (j == 16) {
                 char ch = line.charAt(0);
                 setRobotY(Character.getNumericValue(ch));
@@ -218,31 +217,6 @@ public class LevelManager {
         // TODO load grey birds
     }
 
-    public void updateLaps() {
-        float x;
-        x = (robot.getAbsoluteX() - robot.getCenterX()) - 110;
-        if (lap < 10) {
-            if (x > levelWidth) {
-                lap += 10;
-            }
-        } else if (lap < 20) {
-            if (x > levelWidth * 2) {
-                lap += 10;
-            }
-        } else if (lap < 30) {
-            if (x > levelWidth * 3) {
-                lap += 10;
-            }
-        } else if (lap < 40) {
-            if (x > levelWidth * 4) {
-                lap += 10;
-            }
-        }
-        if (lap % 11 == 0) {
-            this.levelComplete = true;
-        }
-    }
-
     public void updateBackground(){
         bg1.update();
         bg2.update();
@@ -339,17 +313,13 @@ public class LevelManager {
         this.remainingOpponents -= difference;
     }
 
-    public int getLap() {
-        return lap;
+    public int getCheckpoints() {
+        return checkpoints;
     }
 
-    public void setLap(int lap) {
-        this.lap = lap;
-    }
-
-    public void addLap() {
-        this.lap += 10;
-        if (lap % 11 == 0) {
+    public void checkpointPassed() {
+        this.checkpoints--;
+        if (checkpoints == 0) {
             this.levelComplete = true;
         }
     }

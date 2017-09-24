@@ -71,21 +71,32 @@ public class LoadingScreen extends Screen {
         Assets.birds_4 = g.newImage("HUD/bird_4.png", ImageFormat.ARGB4444);
         Assets.birds_5 = g.newImage("HUD/bird_5.png", ImageFormat.ARGB4444);
 
-        Assets.lap_1_1 = g.newImage("HUD/lap_1_1.png", ImageFormat.ARGB4444);
-        Assets.lap_1_2 = g.newImage("HUD/lap_1_2.png", ImageFormat.ARGB4444);
-        Assets.lap_2_2 = g.newImage("HUD/lap_2_2.png", ImageFormat.ARGB4444);
-        Assets.lap_1_3 = g.newImage("HUD/lap_1_3.png", ImageFormat.ARGB4444);
-        Assets.lap_2_3 = g.newImage("HUD/lap_2_3.png", ImageFormat.ARGB4444);
-        Assets.lap_3_3 = g.newImage("HUD/lap_3_3.png", ImageFormat.ARGB4444);
-        Assets.lap_1_4 = g.newImage("HUD/lap_1_4.png", ImageFormat.ARGB4444);
-        Assets.lap_2_4 = g.newImage("HUD/lap_2_4.png", ImageFormat.ARGB4444);
-        Assets.lap_3_4 = g.newImage("HUD/lap_3_4.png", ImageFormat.ARGB4444);
-        Assets.lap_4_4 = g.newImage("HUD/lap_4_4.png", ImageFormat.ARGB4444);
-        Assets.lap_1_5 = g.newImage("HUD/lap_1_5.png", ImageFormat.ARGB4444);
-        Assets.lap_2_5 = g.newImage("HUD/lap_2_5.png", ImageFormat.ARGB4444);
-        Assets.lap_3_5 = g.newImage("HUD/lap_3_5.png", ImageFormat.ARGB4444);
-        Assets.lap_4_5 = g.newImage("HUD/lap_4_5.png", ImageFormat.ARGB4444);
-        Assets.lap_5_5 = g.newImage("HUD/lap_5_5.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_1 = g.newImage("HUD/checkpoints_1.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_2 = g.newImage("HUD/checkpoints_2.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_3 = g.newImage("HUD/checkpoints_3.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_4 = g.newImage("HUD/checkpoints_4.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_5 = g.newImage("HUD/checkpoints_5.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_6 = g.newImage("HUD/checkpoints_6.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_7 = g.newImage("HUD/checkpoints_7.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_8 = g.newImage("HUD/checkpoints_8.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_9 = g.newImage("HUD/checkpoints_9.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_10 = g.newImage("HUD/checkpoints_10.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_11 = g.newImage("HUD/checkpoints_11.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_12 = g.newImage("HUD/checkpoints_12.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_13 = g.newImage("HUD/checkpoints_13.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_14 = g.newImage("HUD/checkpoints_14.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_15 = g.newImage("HUD/checkpoints_15.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_16 = g.newImage("HUD/checkpoints_16.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_17 = g.newImage("HUD/checkpoints_17.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_18 = g.newImage("HUD/checkpoints_18.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_19 = g.newImage("HUD/checkpoints_19.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_20 = g.newImage("HUD/checkpoints_20.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_21 = g.newImage("HUD/checkpoints_21.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_22 = g.newImage("HUD/checkpoints_22.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_23 = g.newImage("HUD/checkpoints_23.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_24 = g.newImage("HUD/checkpoints_24.png", ImageFormat.ARGB4444);
+        Assets.checkpoints_25 = g.newImage("HUD/checkpoints_25.png", ImageFormat.ARGB4444);
+
 
         Assets.bluebiplane = g.newImage("bluebiplane.png", ImageFormat.ARGB4444);
         Assets.explosion = g.newImage("explosion.png", ImageFormat.ARGB4444);

@@ -72,39 +72,59 @@ public class HUD {
         return b;
     }
 
-    public static Image getLaps(int anInt){
-        Image l = null;
+    public static Image getCheckpoints(int anInt){
+        Image c = null;
         if (anInt == 1) {
-            l = Assets.lap_1_1;
+            c = Assets.checkpoints_1;
         } else if (anInt == 2) {
-            l = Assets.lap_1_2;
-        } else if (anInt == 12) {
-            l = Assets.lap_2_2;
+            c = Assets.checkpoints_2;
         } else if (anInt == 3) {
-            l = Assets.lap_1_3;
-        } else if (anInt == 13) {
-            l = Assets.lap_2_3;
-        } else if (anInt == 23) {
-            l = Assets.lap_3_3;
+            c = Assets.checkpoints_3;
         } else if (anInt == 4) {
-            l = Assets.lap_1_4;
-        } else if (anInt == 14) {
-            l = Assets.lap_2_4;
-        } else if (anInt == 24) {
-            l = Assets.lap_3_4;
-        } else if (anInt == 34) {
-            l = Assets.lap_4_4;
+            c = Assets.checkpoints_4;
         } else if (anInt == 5) {
-            l = Assets.lap_1_5;
+            c = Assets.checkpoints_5;
+        } else if (anInt == 6) {
+            c = Assets.checkpoints_6;
+        } else if (anInt == 7) {
+            c = Assets.checkpoints_7;
+        } else if (anInt == 8) {
+            c = Assets.checkpoints_8;
+        } else if (anInt == 9) {
+            c = Assets.checkpoints_9;
+        } else if (anInt == 10) {
+            c = Assets.checkpoints_10;
+        } else if (anInt == 11) {
+            c = Assets.checkpoints_11;
+        } else if (anInt == 12) {
+            c = Assets.checkpoints_12;
+        } else if (anInt == 13) {
+            c = Assets.checkpoints_13;
+        } else if (anInt == 14) {
+            c = Assets.checkpoints_14;
         } else if (anInt == 15) {
-            l = Assets.lap_2_5;
+            c = Assets.checkpoints_15;
+        } else if (anInt == 16) {
+            c = Assets.checkpoints_16;
+        } else if (anInt == 17) {
+            c = Assets.checkpoints_17;
+        } else if (anInt == 18) {
+            c = Assets.checkpoints_18;
+        } else if (anInt == 19) {
+            c = Assets.checkpoints_19;
+        } else if (anInt == 20) {
+            c = Assets.checkpoints_20;
+        } else if (anInt == 21) {
+            c = Assets.checkpoints_21;
+        } else if (anInt == 22) {
+            c = Assets.checkpoints_22;
+        } else if (anInt == 23) {
+            c = Assets.checkpoints_23;
+        } else if (anInt == 24) {
+            c = Assets.checkpoints_24;
         } else if (anInt == 25) {
-            l = Assets.lap_3_5;
-        } else if (anInt == 35) {
-            l = Assets.lap_4_5;
-        } else if (anInt == 45) {
-            l = Assets.lap_5_5;
+            c = Assets.checkpoints_25;
         }
-        return l;
+        return c;
     }
 }

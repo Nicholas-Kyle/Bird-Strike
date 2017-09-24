@@ -17,10 +17,10 @@ import com.bangtidygames.framework.Screen;
 
 public class GameScreen extends Screen {
     enum GameState {
-        NumberOfLaps, Ready, Running, Paused, GameOver, Complete
+        Ready, Running, Paused, GameOver, Complete
     }
 
-    GameState state = GameState.NumberOfLaps;
+    GameState state = GameState.Ready;
 
     private static Robot robot;
 
@@ -71,8 +71,6 @@ public class GameScreen extends Screen {
     public void update(float deltaTime) {
         List touchEvents = game.getInput().getTouchEvents();
 
-        if (state == GameState.NumberOfLaps)
-            updateNumberOfLaps();
         if (state == GameState.Ready)
             updateReady();
         if (state == GameState.Running)
@@ -85,17 +83,11 @@ public class GameScreen extends Screen {
             updateComplete(touchEvents);
     }
 
-    private void updateNumberOfLaps() {
+    private void updateReady() {
         if (startTime == 0) {
             startTime = System.nanoTime();
         }
         if (System.nanoTime() > (startTime + 750000000)) {
-            state = GameState.Ready;
-        }
-    }
-
-    private void updateReady() {
-        if (System.nanoTime() > (startTime + 1500000000)) {
             state = GameState.Running;
         }
     }
@@ -258,10 +250,6 @@ public class GameScreen extends Screen {
 
         levelManager.paintBirds(g);
 
-        if (state == GameState.NumberOfLaps)
-
-            drawNumberOfLapsUI();
-
         if (state == GameState.Ready)
 
             drawReadyUI();
@@ -294,12 +282,6 @@ public class GameScreen extends Screen {
 
     }
 
-    private void drawNumberOfLapsUI() {
-        Graphics g = game.getGraphics();
-        g.drawARGB(155, 0, 0, 0);
-        g.drawString(levelManager.getLap() + " Laps", 400, 240, paint);
-    }
-
     private void drawReadyUI() {
         Graphics g = game.getGraphics();
         g.drawARGB(155, 0, 0, 0);
@@ -311,7 +293,7 @@ public class GameScreen extends Screen {
         if (!levelManager.isLevelComplete()) {
             g.drawImage(HUD.getHearts(LoadSave.hearts), 0, 0);
             g.drawImage(HUD.getBirds(robot.getBirdsHit()), 0, 0);
-            g.drawImage(HUD.getLaps(levelManager.getLap()), 0, 0);
+            g.drawImage(HUD.getCheckpoints(levelManager.getCheckpoints()), 0, 0);
             g.drawImage(Assets.pause, pauseXPos, pauseYPos);
         }
     }
