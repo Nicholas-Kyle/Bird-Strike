@@ -15,7 +15,7 @@ public class Assets {
     public static Image splash, menu_desert, menu_forest, menu_graveyard, menu_snow;
     public static Image level_1, level_2, level_3, level_4, level_5, level_6;
     public static Image setting, pause, menuButton, restartButton, resumeButton;
-    public static Image one_star, two_stars, three_stars;
+    public static Image one_star_menu, two_stars_menu, three_stars_menu;
     public static Image bluebiplane, explosion;
     public static Image brown_1, brown_2, brown_3, brown_4, brown_5, brown_6, brown_7, brown_8, brown_9,
             grey_1, grey_2, grey_3, grey_4, grey_5, blank;
@@ -29,6 +29,7 @@ public class Assets {
             checkpoints_13, checkpoints_14, checkpoints_15, checkpoints_16, checkpoints_17, checkpoints_18,
             checkpoints_19, checkpoints_20, checkpoints_21, checkpoints_22, checkpoints_23, checkpoints_24,
             checkpoints_25;
+    public static Image one_star_complete, two_stars_complete, three_stars_complete;
     public static Image blueFinishPost;
     public static Image grass_1, grass_2, grass_3, grass_4, grass_5, grass_6, grass_7, grass_8, grass_9, grass_10, grass_11,
             grass_12, grass_13, grass_14, grass_15, grass_16, grass_17, grass_18, grass_19, grass_20, grass_21, grass_22,

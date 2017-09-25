@@ -1,6 +1,7 @@
 package com.bangtidygames.birdstrike;
 
 import java.util.List;
+import java.util.Random;
 
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -31,6 +32,9 @@ public class GameScreen extends Screen {
 
     private Image currentSprite;
 
+    private Random rand;
+    private int  n;
+
     private int pauseXPos = 15;
     private int pauseYPos = 394;
     private int pauseUIResumeXPos = 250;
@@ -39,6 +43,8 @@ public class GameScreen extends Screen {
     private int pauseUIRestartYPos = 180;
     private int pauseUIMenuXPos = 250;
     private int pauseUIMenuYPos = 310;
+    private int buttonWidth = 300;
+    private int buttonHeight = 108;
 
     private Paint paint, paint2;
 
@@ -46,11 +52,6 @@ public class GameScreen extends Screen {
 
     public GameScreen(Game game, int levelNumber) {
         super(game);
-
-        robot = new Robot();
-        levelManager = new LevelManager(levelNumber);
-
-        currentSprite = Assets.bluebiplane;
 
         // Defining a paint object
         paint = new Paint();
@@ -64,6 +65,15 @@ public class GameScreen extends Screen {
         paint2.setTextAlign(Paint.Align.CENTER);
         paint2.setAntiAlias(true);
         paint2.setColor(Color.WHITE);
+
+        robot = new Robot();
+        levelManager = new LevelManager(levelNumber);
+
+        currentSprite = Assets.bluebiplane;
+
+        rand = new Random();
+        //Generates a random int between 1 and 50
+        n = rand.nextInt(50) + 1;
 
     }
 
@@ -181,11 +191,12 @@ public class GameScreen extends Screen {
     }
 
     private void updatePaused(List touchEvents) {
-        int buttonWidth = 300;
-        int buttonHeight = 108;
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
+            if (event.type == TouchEvent.TOUCH_DOWN) {
+                liftOnce = true;
+            }
             if (event.type == TouchEvent.TOUCH_UP && liftOnce) {
                 if (inBounds(event, pauseUIResumeXPos, pauseUIResumeYPos, buttonWidth,
                         buttonHeight)) {
@@ -199,8 +210,6 @@ public class GameScreen extends Screen {
                     nullify();
                     goToMenu();
                 }
-            } else {
-                liftOnce = true;
             }
         }
     }
@@ -210,23 +219,36 @@ public class GameScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_DOWN) {
-                if (inBounds(event, 0, 0, 800, 480)) {
+                liftOnce = true;
+            }
+            if (event.type == TouchEvent.TOUCH_UP && liftOnce) {
+                if (inBounds(event, pauseUIRestartXPos, pauseUIRestartYPos, buttonWidth,
+                        buttonHeight)) {
                     nullify();
-                    game.setScreen(new MainMenuScreen(game));
-                    return;
+                    restartLevel(levelManager.getLevel());
+                } else if (inBounds(event, pauseUIMenuXPos, pauseUIMenuYPos, buttonWidth,
+                        buttonHeight)) {
+                    nullify();
+                    goToMenu();
                 }
             }
         }
-
     }
 
     private void updateComplete(List touchEvents) {
         int len = touchEvents.size();
-
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_DOWN) {
-                if (inBounds(event, 0, 240, 800, 240)) {
+                liftOnce = true;
+            }
+            if (event.type == TouchEvent.TOUCH_UP && liftOnce) {
+                if (inBounds(event, pauseUIRestartXPos, pauseUIRestartYPos, buttonWidth,
+                        buttonHeight)) {
+                    nullify();
+                    restartLevel(levelManager.getLevel());
+                } else if (inBounds(event, pauseUIMenuXPos, pauseUIMenuYPos, buttonWidth,
+                        buttonHeight)) {
                     nullify();
                     goToMenu();
                 }
@@ -299,7 +321,6 @@ public class GameScreen extends Screen {
 
     private void drawPausedUI() {
         Graphics g = game.getGraphics();
-        // Darken the entire screen so you can display the Paused screen.
         g.drawARGB(155, 0, 0, 0);
         g.drawImage(Assets.resumeButton, pauseUIResumeXPos, pauseUIResumeYPos);
         g.drawImage(Assets.restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
@@ -309,26 +330,40 @@ public class GameScreen extends Screen {
 
     private void drawGameOverUI() {
         Graphics g = game.getGraphics();
-        g.drawRect(0, 0, 1281, 801, Color.BLACK);
+        int textYPos = (pauseUIResumeYPos + buttonHeight/2);
+        g.drawARGB(155, 0, 0, 0);
+
         if (robot.isCollision()) {
-            g.drawString("Ok good try, next time try to avoid that, ok", 400, 240, paint);
+            if (n<=44) {
+                g.drawString("Ok good try, next time try to avoid that", 400, textYPos, paint);
+            } else if (n>44 && n<=48) {
+                g.drawString("Wow, that was truly awful", 400, textYPos, paint);
+            } else if (n>48 && n<=50) {
+                g.drawString("I say 'weak', you say 'sauce'", 400, textYPos, paint);
+            }
         } else if (robot.isTooHigh()) {
-            g.drawString("Looks like you flew too close to the sun", 400, 240, paint);
+            g.drawString("Looks like you flew too close to the sun", 400, textYPos, paint);
         } else if (robot.isBadLanding()) {
-            g.drawString("Try landing a bit slower", 400, 240, paint);
+            g.drawString("Try landing a bit slower", 400, textYPos, paint);
         }
-        //g.drawString("Tap to return.", 400, 290, paint);
+        g.drawImage(Assets.restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
+        g.drawImage(Assets.menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
 
     }
 
     private void drawCompleteUI() {
         Graphics g = game.getGraphics();
-        g.drawRect(0, 0, 1281, 801, Color.BLACK);
-        g.drawString("You hit " + robot.getBirdsHit() + " birds", 400, 165, paint2);
-        g.drawString("Menu", 400, 360, paint2);
-
-        //g.drawString("Tap to return.", 400, 290, paint);
-
+        g.drawARGB(155, 0, 0, 0);
+        g.drawString("You hit " + robot.getBirdsHit() + " birds", 400, 35, paint);
+        if (LoadSave.getStars(levelManager.getLevel())==1) {
+            g.drawImage(Assets.one_star_complete, 275, pauseUIRestartYPos - 125);
+        } else if (LoadSave.getStars(levelManager.getLevel())==2) {
+            g.drawImage(Assets.two_stars_complete, 275, pauseUIRestartYPos - 125);
+        } else if (LoadSave.getStars(levelManager.getLevel())==3) {
+            g.drawImage(Assets.three_stars_complete, 275, pauseUIRestartYPos - 125);
+        }
+        g.drawImage(Assets.restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
+        g.drawImage(Assets.menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
     }
 
     @Override
@@ -358,7 +393,11 @@ public class GameScreen extends Screen {
     }
 
     private void restartLevel(int level) {
-        game.setScreen(new GameScreen(game, level));
+        if (LoadSave.getHearts() < 1) {
+            this.goToMenu();
+        } else {
+            game.setScreen(new GameScreen(game, level));
+        }
     }
 
     public static Robot getRobot() {

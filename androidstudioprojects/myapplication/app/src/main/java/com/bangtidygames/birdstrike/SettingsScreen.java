@@ -14,6 +14,7 @@ import java.util.List;
 public class SettingsScreen extends Screen {
 
     private int xPos;
+    private boolean liftOnce = false;
 
     public SettingsScreen(Game game, int xPos) {
         super(game);
@@ -27,7 +28,12 @@ public class SettingsScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
 
-            if (event.type == TouchEvent.TOUCH_UP) {
+
+            if (event.type == TouchEvent.TOUCH_DOWN) {
+                liftOnce = true;
+            }
+
+            if (event.type == TouchEvent.TOUCH_UP && liftOnce == true) {
                 if (inBounds(event, 50, 50, 70, 71)) {
                     //TODO
                 }

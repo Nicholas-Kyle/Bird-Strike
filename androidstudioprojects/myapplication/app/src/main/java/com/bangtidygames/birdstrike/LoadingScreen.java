@@ -29,9 +29,13 @@ public class LoadingScreen extends Screen {
         Assets.level_5 = g.newImage("MenuLevels/lvl5.png", ImageFormat.ARGB4444);
         Assets.level_6 = g.newImage("MenuLevels/lvl6.png", ImageFormat.ARGB4444);
 
-        Assets.one_star = g.newImage("MenuLevels/oneStar.png", ImageFormat.ARGB4444);
-        Assets.two_stars = g.newImage("MenuLevels/twoStars.png", ImageFormat.ARGB4444);
-        Assets.three_stars = g.newImage("MenuLevels/threeStars.png", ImageFormat.ARGB4444);
+        Assets.one_star_menu = g.newImage("MenuLevels/oneStarMenu.png", ImageFormat.ARGB4444);
+        Assets.two_stars_menu = g.newImage("MenuLevels/twoStarsMenu.png", ImageFormat.ARGB4444);
+        Assets.three_stars_menu = g.newImage("MenuLevels/threeStarsMenu.png", ImageFormat.ARGB4444);
+
+        Assets.one_star_complete = g.newImage("oneStarComplete.png", ImageFormat.ARGB4444);
+        Assets.two_stars_complete = g.newImage("twoStarsComplete.png", ImageFormat.ARGB4444);
+        Assets.three_stars_complete = g.newImage("threeStarsComplete.png", ImageFormat.ARGB4444);
 
         Assets.setting = g.newImage("MenuLevels/settings.png", ImageFormat.ARGB4444);
         Assets.pause = g.newImage("pauseButton.png", ImageFormat.ARGB4444);

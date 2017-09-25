@@ -16,6 +16,7 @@ import com.bangtidygames.framework.Input.TouchEvent;
 public class MainMenuScreen extends Screen {
 
     private boolean dragging = false;
+    private boolean liftOnce = false;
 
     private int x = 0;
     private int maxMenuX = 480;
@@ -53,9 +54,12 @@ public class MainMenuScreen extends Screen {
                     currentDrag = drag-event.x;
                 }
             }
+            if (event.type == TouchEvent.TOUCH_DOWN) {
+                liftOnce = true;
+            }
 
             if (event.type == TouchEvent.TOUCH_UP) {
-                if (dragging == false) {
+                if (dragging == false && liftOnce == true) {
                     for (MenuLevelPosition level : LevelPositions) {
                         if (inBounds(event, level.getX() - x, level.getY(), 119, 150)) {
                             if (LoadSave.getHearts() != 0) {
@@ -116,11 +120,11 @@ public class MainMenuScreen extends Screen {
                     g.drawImage(Assets.level_6, level.getX() - menuPos, level.getY());
                 }
                 if (LoadSave.stars[level.getLevelNumber()-1] == 1){
-                    g.drawImage(Assets.one_star, level.getX() - menuPos, level.getY());
+                    g.drawImage(Assets.one_star_menu, level.getX() - menuPos, level.getY());
                 } else if (LoadSave.stars[level.getLevelNumber()-1] == 2) {
-                    g.drawImage(Assets.two_stars, level.getX() - menuPos, level.getY());
+                    g.drawImage(Assets.two_stars_menu, level.getX() - menuPos, level.getY());
                 } else if (LoadSave.stars[level.getLevelNumber()-1] == 3) {
-                    g.drawImage(Assets.three_stars, level.getX() - menuPos, level.getY());
+                    g.drawImage(Assets.three_stars_menu, level.getX() - menuPos, level.getY());
                 }
             }
         } else if (menuPos <= 0){
@@ -140,11 +144,11 @@ public class MainMenuScreen extends Screen {
                     g.drawImage(Assets.level_6, level.getX(), level.getY());
                 }
                 if (LoadSave.stars[level.getLevelNumber()-1] == 1){
-                    g.drawImage(Assets.one_star, level.getX(), level.getY());
+                    g.drawImage(Assets.one_star_menu, level.getX(), level.getY());
                 } else if (LoadSave.stars[level.getLevelNumber()-1] == 2) {
-                    g.drawImage(Assets.two_stars, level.getX(), level.getY());
+                    g.drawImage(Assets.two_stars_menu, level.getX(), level.getY());
                 } else if (LoadSave.stars[level.getLevelNumber()-1] == 3) {
-                    g.drawImage(Assets.three_stars, level.getX(), level.getY());
+                    g.drawImage(Assets.three_stars_menu, level.getX(), level.getY());
                 }
             }
         } else if (menuPos >= maxMenuX){
@@ -167,11 +171,11 @@ public class MainMenuScreen extends Screen {
                     g.drawImage(Assets.level_6, level.getX()-maxMenuX, level.getY());
                 }
                 if (LoadSave.stars[level.getLevelNumber()-1] == 1){
-                    g.drawImage(Assets.one_star, level.getX()-maxMenuX, level.getY());
+                    g.drawImage(Assets.one_star_menu, level.getX()-maxMenuX, level.getY());
                 } else if (LoadSave.stars[level.getLevelNumber()-1] == 2) {
-                    g.drawImage(Assets.two_stars, level.getX()-maxMenuX, level.getY());
+                    g.drawImage(Assets.two_stars_menu, level.getX()-maxMenuX, level.getY());
                 } else if (LoadSave.stars[level.getLevelNumber()-1] == 3) {
-                    g.drawImage(Assets.three_stars, level.getX()-maxMenuX, level.getY());
+                    g.drawImage(Assets.three_stars_menu, level.getX()-maxMenuX, level.getY());
                 }
             }
         }
