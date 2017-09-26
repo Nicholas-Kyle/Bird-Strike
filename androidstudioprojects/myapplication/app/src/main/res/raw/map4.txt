@@ -1,20 +1,21 @@
 ! Bang Tidy Games
-! New scanner test
+! Map 3
+
+
+norn   qmnq   o mqrq  jonrn          ro
+8888888888888888888888888888i       4888
+
+         jonr
+        48888i                   nq j
+88i                             48888888
+
+           j        jonr
+       48888i      48888i
+
+                                np j
+       s         jom           je6663
+aaaaaae66663aaae6666663aaaaaae662gggfaaa
 ! Number of Laps
-3
-! Map
-
-
-
-
-        s
-       488888888888i             m qn
-                                48888i
-
-
-
-                     r  n
-k                   e666663
-63jq        jpn  qr 2gggggf q         oe
-66663aaae66666666661hggggg9d6663aae66666
-ggggf7772ggggggggggggggggggggggf772ggggg
+6
+! Robot start tile from top, char values
+e

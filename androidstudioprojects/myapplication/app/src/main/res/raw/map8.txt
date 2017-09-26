@@ -1,23 +1,21 @@
 ! Bang Tidy Games
-! Level 1 - Desert
-! # = Tile Legend
-! 5 = purple_tile_above
-! 8 = purpletiletop
-! 2 = purple_tile_bottom
-! 4 = purple_tile_below
-! 6 = GrassRight
+! Map 1
 
 
 
 
+        s
+       488888888888i             m qn
+                                48888i
 
 
 
-
-               222
-            222
-         222
-      222
-   222
-222
-2222222222222222222222222222222222222222
+                     r  n
+k                   e666663
+63jq        jpn  qr 2gggggf q         oe
+66663aaae66666666661hggggg9d6663aae66666
+ggggf7772ggggggggggggggggggggggf772ggggg
+! Number of Checkpoints
+3
+! Robot start tile from top
+5

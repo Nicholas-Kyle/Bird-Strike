@@ -1,8 +1,8 @@
 ! Bang Tidy Games
 ! Map 3
 
-              o mq
-norn   qmnq  e6663rq  jonrn          ro
+
+norn   qmnq   o mqrq  jonrn          ro
 8888888888888888888888888888i       4888
 
          jonr
@@ -10,10 +10,10 @@ norn   qmnq  e6663rq  jonrn          ro
 88i                             48888888
 
            j        jonr
-     4888888i      48888i
+       48888i      48888i
 
-                                np rq
-       s         jomk          je6663
+                                np j
+       s         jom           je6663
 aaaaaae66663aaae6666663aaaaaae662gggfaaa
 ! Number of Laps
 6

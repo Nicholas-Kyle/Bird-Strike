@@ -2,20 +2,20 @@
 ! Map 2
 
 
-                                     ro
-        s                           488i
-       4888i
-                    m qn   o
-mpj                4888888888i
-888i                                   4
 
-             krn           4888i
-            48888i
-k
-e3jq      lo           n oql rn     norn
-66663aaae66666666666666666666663aae66666
+
+        s
+       488888888888i             m qn
+                                48888i
+
+
+
+                     r  n
+k                   e666663
+63jq        jpn  qr 2gggggf q         oe
+66663aaae66666666661hggggg9d6663aae66666
 ggggf7772ggggggggggggggggggggggf772ggggg
-! Number of Laps
-5
+! Number of Checkpoints
+3
 ! Robot start tile from top
-4
+5
