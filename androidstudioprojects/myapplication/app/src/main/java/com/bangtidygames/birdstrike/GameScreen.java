@@ -141,14 +141,6 @@ public class GameScreen extends Screen {
                 state = GameState.GameOver;
             }
 
-            if (robot.isCaughtOpponent()) {
-                if (levelManager.getRemainingOpponents() == 0) {
-                    state = GameState.GameOver;
-                } else {
-                    robot.setCaughtOpponent(false);
-                }
-            }
-
             robot.update(deltaTime);
             levelManager.updateTiles();
             levelManager.updateBirds(deltaTime);
@@ -266,8 +258,6 @@ public class GameScreen extends Screen {
 
         g.drawImage(currentSprite, robot.getCenterX() - 39,
                 robot.getCenterY() - 18);
-
-        levelManager.paintWarp(g);
 
         levelManager.paintBirds(g);
 
