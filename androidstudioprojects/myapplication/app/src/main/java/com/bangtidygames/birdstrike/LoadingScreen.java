@@ -22,6 +22,7 @@ public class LoadingScreen extends Screen {
         Assets.menu_graveyard = g.newImage("MenuMap/graveyard.png", ImageFormat.RGB565);
         Assets.menu_snow = g.newImage("MenuMap/snow.png", ImageFormat.RGB565);
 
+        Assets.level_locked = g.newImage("MenuLevels/lvl_locked.png", ImageFormat.ARGB4444);
         Assets.level_1 = g.newImage("MenuLevels/lvl1.png", ImageFormat.ARGB4444);
         Assets.level_2 = g.newImage("MenuLevels/lvl2.png", ImageFormat.ARGB4444);
         Assets.level_3 = g.newImage("MenuLevels/lvl3.png", ImageFormat.ARGB4444);
@@ -43,6 +44,7 @@ public class LoadingScreen extends Screen {
         Assets.three_stars_complete = g.newImage("threeStarsComplete.png", ImageFormat.ARGB4444);
 
         Assets.setting = g.newImage("MenuLevels/settings.png", ImageFormat.ARGB4444);
+        Assets.star = g.newImage("MenuLevels/star.png", ImageFormat.ARGB4444);
         Assets.pause = g.newImage("pauseButton.png", ImageFormat.ARGB4444);
         Assets.menuButton = g.newImage("menuButton.png", ImageFormat.ARGB4444);
         Assets.resumeButton = g.newImage("resumeButton.png", ImageFormat.ARGB4444);

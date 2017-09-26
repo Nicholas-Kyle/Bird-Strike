@@ -13,8 +13,10 @@ import com.bangtidygames.framework.Sound;
 public class Assets {
 
     public static Image splash, menu_desert, menu_forest, menu_graveyard, menu_snow;
-    public static Image level_1, level_2, level_3, level_4, level_5, level_6;
-    public static Image setting, pause, menuButton, restartButton, resumeButton;
+    public static Image level_locked, level_1, level_2, level_3, level_4, level_5, level_6, level_7, level_8,
+            level_9, level_10;
+    //TODO add levels
+    public static Image setting, pause, menuButton, restartButton, resumeButton, star;
     public static Image one_star_menu, two_stars_menu, three_stars_menu;
     public static Image bluebiplane, explosion;
     public static Image brown_1, brown_2, brown_3, brown_4, brown_5, brown_6, brown_7, brown_8, brown_9,
