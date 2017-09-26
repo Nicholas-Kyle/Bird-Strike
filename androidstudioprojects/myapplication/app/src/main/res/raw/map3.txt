@@ -1,17 +1,21 @@
 ! Bang Tidy Games
-! Level 1 tutorial
+! Map 3
 
+              o mq
+norn   qmnq  e6663rq  jonrn          ro
+8888888888888888888888888888i       4888
 
+         jonr
+        48888i                   nq j
+88i                             48888888
 
+           j        jonr
+     4888888i      48888i
 
-
-
-
-
-
-
-
-
-
-6666666666666666666666666666666666666666
-gggf772ggggggggggggf777772gggggggggggggg
+                                np rq
+       s         jomk          je6663
+aaaaaae66663aaae6666663aaaaaae662gggfaaa
+! Number of Laps
+6
+! Robot start tile from top, char values
+e
