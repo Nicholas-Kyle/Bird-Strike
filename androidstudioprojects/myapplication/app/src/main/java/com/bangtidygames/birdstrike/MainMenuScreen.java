@@ -19,7 +19,8 @@ public class MainMenuScreen extends Screen {
     private boolean liftOnce = false;
 
     private int x = 0;
-    private int maxMenuX = 480;
+    //TODO adjust maxMenuX when adding levels
+    private int maxMenuX;
     private int currentDrag;
     private int drag;
 
@@ -31,6 +32,7 @@ public class MainMenuScreen extends Screen {
     public MainMenuScreen(Game game) {
         super(game);
         this.setLevelPositions();
+        this.setMaxMenuX();
     }
 
     public MainMenuScreen(Game game, int xPos) {
@@ -118,7 +120,16 @@ public class MainMenuScreen extends Screen {
                     g.drawImage(Assets.level_5, level.getX() - menuPos, level.getY());
                 } else if(level.getLevelNumber() == 6) {
                     g.drawImage(Assets.level_6, level.getX() - menuPos, level.getY());
+                } else if(level.getLevelNumber() == 7) {
+                    g.drawImage(Assets.level_7, level.getX() - menuPos, level.getY());
+                } else if(level.getLevelNumber() == 8) {
+                    g.drawImage(Assets.level_8, level.getX() - menuPos, level.getY());
+                } else if(level.getLevelNumber() == 9) {
+                    g.drawImage(Assets.level_9, level.getX() - menuPos, level.getY());
+                } else if(level.getLevelNumber() == 10) {
+                    g.drawImage(Assets.level_10, level.getX() - menuPos, level.getY());
                 }
+                //TODO add levels
                 if (LoadSave.stars[level.getLevelNumber()-1] == 1){
                     g.drawImage(Assets.one_star_menu, level.getX() - menuPos, level.getY());
                 } else if (LoadSave.stars[level.getLevelNumber()-1] == 2) {
@@ -142,6 +153,14 @@ public class MainMenuScreen extends Screen {
                     g.drawImage(Assets.level_5, level.getX(), level.getY());
                 } else if(level.getLevelNumber() == 6) {
                     g.drawImage(Assets.level_6, level.getX(), level.getY());
+                } else if(level.getLevelNumber() == 7) {
+                    g.drawImage(Assets.level_7, level.getX(), level.getY());
+                } else if(level.getLevelNumber() == 8) {
+                    g.drawImage(Assets.level_8, level.getX(), level.getY());
+                } else if(level.getLevelNumber() == 9) {
+                    g.drawImage(Assets.level_9, level.getX(), level.getY());
+                } else if(level.getLevelNumber() == 10) {
+                    g.drawImage(Assets.level_10, level.getX(), level.getY());
                 }
                 if (LoadSave.stars[level.getLevelNumber()-1] == 1){
                     g.drawImage(Assets.one_star_menu, level.getX(), level.getY());
@@ -169,6 +188,14 @@ public class MainMenuScreen extends Screen {
                     g.drawImage(Assets.level_5, level.getX()-maxMenuX, level.getY());
                 } else if(level.getLevelNumber() == 6) {
                     g.drawImage(Assets.level_6, level.getX()-maxMenuX, level.getY());
+                } else if(level.getLevelNumber() == 7) {
+                    g.drawImage(Assets.level_7, level.getX()-maxMenuX, level.getY());
+                } else if(level.getLevelNumber() == 8) {
+                    g.drawImage(Assets.level_8, level.getX()-maxMenuX, level.getY());
+                } else if(level.getLevelNumber() == 9) {
+                    g.drawImage(Assets.level_9, level.getX()-maxMenuX, level.getY());
+                } else if(level.getLevelNumber() == 10) {
+                    g.drawImage(Assets.level_10, level.getX()-maxMenuX, level.getY());
                 }
                 if (LoadSave.stars[level.getLevelNumber()-1] == 1){
                     g.drawImage(Assets.one_star_menu, level.getX()-maxMenuX, level.getY());
@@ -203,6 +230,24 @@ public class MainMenuScreen extends Screen {
         LevelPositions.add(level5);
         MenuLevelPosition level6 = new MenuLevelPosition((x+gapX*5), (y+gapY), 6);
         LevelPositions.add(level6);
+        MenuLevelPosition level7 = new MenuLevelPosition((x+gapX*6), y, 7);
+        LevelPositions.add(level7);
+        MenuLevelPosition level8 = new MenuLevelPosition((x+gapX*7), (y+gapY), 8);
+        LevelPositions.add(level8);
+        MenuLevelPosition level9 = new MenuLevelPosition((x+gapX*8), y, 9);
+        LevelPositions.add(level9);
+        MenuLevelPosition level10 = new MenuLevelPosition((x+gapX*9), (y+gapY), 10);
+        LevelPositions.add(level10);
+    }
+
+    private void setMaxMenuX(){
+        int greatestX = 0;
+        for (MenuLevelPosition level : LevelPositions) {
+            if (level.getX() > greatestX){
+                greatestX = level.getX();
+            }
+        }
+        maxMenuX = greatestX-631;
     }
 
     @Override

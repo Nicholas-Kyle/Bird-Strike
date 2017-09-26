@@ -46,6 +46,7 @@ public class Bird {
             if (Rect.intersects(r, Robot.rect) || Rect.intersects(r, Robot.rect2)) {
                 alive = false;
                 robot.hitBird();
+                //TODO adjust volume in settings
                 Assets.birdSound.play(0.60f);
             }
         }

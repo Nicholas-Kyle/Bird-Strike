@@ -17,8 +17,8 @@ public class LoadSave {
     public static boolean soundEnabled = true;
     public static int[] highscores = new int[]{100, 80, 50, 30, 10};
 
-    // TODO update when more than 100 levels are added
-    public static int[] stars = new int[]{0, 0, 0, 0, 0, 0};
+    // TODO update when more levels are added
+    public static int[] stars = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public static int hearts = 20;
 
     public static void load(FileIO files) {

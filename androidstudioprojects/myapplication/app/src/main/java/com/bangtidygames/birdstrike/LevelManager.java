@@ -82,14 +82,32 @@ public class LevelManager {
             scanner = new Scanner(SampleGame.map3);
         }
         if (level == 4) {
-            //TODO next level
+            width = 40;
             scanner = new Scanner(SampleGame.map4);
         }
         if (level == 5) {
+            width = 40;
             scanner = new Scanner(SampleGame.map5);
         }
         if (level == 6) {
+            width = 40;
             scanner = new Scanner(SampleGame.map6);
+        }
+        if (level == 7) {
+            width = 40;
+            scanner = new Scanner(SampleGame.map7);
+        }
+        if (level == 8) {
+            width = 40;
+            scanner = new Scanner(SampleGame.map8);
+        }
+        if (level == 9) {
+            width = 40;
+            scanner = new Scanner(SampleGame.map9);
+        }
+        if (level == 10) {
+            width = 40;
+            scanner = new Scanner(SampleGame.map10);
         }
 
         while (scanner.hasNextLine()) {
@@ -126,64 +144,71 @@ public class LevelManager {
 
     private void loadBirds(int level) {
         //TODO check when setting new level
-        if (level == 1) {
-            Bird bird = new Bird(1000, 200, (float)1.36);
+        if (level == 2) {
+
+            Bird bird = new Bird(920, 200, (float)1.36);
             birdArray.add(bird);
-            Bird bird2 = new Bird(1400, 300, (float)1.36);
+
+            Bird bird2 = new Bird(1250, 300, (float)1.36);
             birdArray.add(bird2);
-            Bird bird3 = new Bird(1800, 140, (float)1.36);
+
+            Bird bird3 = new Bird(1650, 140, (float)1.36);
             birdArray.add(bird3);
-            Bird bird4 = new Bird(2140, 140, (float)1.36);
+
+            Bird bird4 = new Bird(2010, 140, (float)1.36);
             birdArray.add(bird4);
-            Bird bird5 = new Bird(2400, 250, (float)1.36);
+
+            Bird bird5 = new Bird(2250, 250, (float)1.36);
             birdArray.add(bird5);
+
             this.oneStar=0;
             this.twoStars=3;
             this.threeStars=5;
-        } else if (level == 2) {
-            Bird bird = new Bird(1400, 300, (float) 1.36);
+
+        } else if (level == 5) {
+
+            Bird bird = new Bird(1250, 300, (float) 1.36);
             birdArray.add(bird);
-            Bird bird2 = new Bird(1800, 140, (float) 1.36);
+
+            Bird bird2 = new Bird(1690, 140, (float) 1.36);
             birdArray.add(bird2);
-            Bird bird3 = new Bird(2140, 147, (float) 1.36);
+
+            Bird bird3 = new Bird(2050, 200, (float) 1.36);
             birdArray.add(bird3);
-            Bird bird4 = new Bird(2400, 250, (float) 1.36);
+
+            Bird bird4 = new Bird(2270, 250, (float) 1.36);
             birdArray.add(bird4);
-            Bird bird5 = new Bird(3600, 350, (float) 1.36);
+
+            Bird bird5 = new Bird(3500, 350, (float) 1.36);
             birdArray.add(bird5);
+
             this.oneStar=0;
             this.twoStars=3;
             this.threeStars=5;
-        } else if (level == 3) {
-            //red lap 1
+
+        } else if (level == 10) {
+
             Bird bird = new Bird(850, 200, (float)1.36);
             birdArray.add(bird);
 
-            //blue lap 2
             Bird bird2 = new Bird(1620, 8, (float)1.36);
             birdArray.add(bird2);
 
-            //green lap 3
             Bird bird3 = new Bird(2250, 385, (float)1.36);
             birdArray.add(bird3);
 
-            //yellow lap 4
             Bird bird4 = new Bird(3350, 140, (float)1.36);
             birdArray.add(bird4);
 
-            //purple lap 5
             Bird bird5 = new Bird(3750, 200, (float)1.36);
             birdArray.add(bird5);
 
-            //purple lap 5
             Bird bird6 = new Bird(4150, 385, (float)1.36);
             birdArray.add(bird6);
 
-            //cyan lap 6
             Bird bird7 = new Bird(4550, 140, (float)1.36);
             birdArray.add(bird7);
 
-            //cyan lap 6
             Bird bird8 = new Bird(4950, 250, (float)1.36);
             birdArray.add(bird8);
 

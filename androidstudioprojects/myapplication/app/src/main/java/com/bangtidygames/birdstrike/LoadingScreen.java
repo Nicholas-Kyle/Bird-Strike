@@ -28,6 +28,11 @@ public class LoadingScreen extends Screen {
         Assets.level_4 = g.newImage("MenuLevels/lvl4.png", ImageFormat.ARGB4444);
         Assets.level_5 = g.newImage("MenuLevels/lvl5.png", ImageFormat.ARGB4444);
         Assets.level_6 = g.newImage("MenuLevels/lvl6.png", ImageFormat.ARGB4444);
+        Assets.level_7 = g.newImage("MenuLevels/lvl7.png", ImageFormat.ARGB4444);
+        Assets.level_8 = g.newImage("MenuLevels/lvl8.png", ImageFormat.ARGB4444);
+        Assets.level_9 = g.newImage("MenuLevels/lvl9.png", ImageFormat.ARGB4444);
+        Assets.level_10 = g.newImage("MenuLevels/lvl10.png", ImageFormat.ARGB4444);
+        //TODO add levels
 
         Assets.one_star_menu = g.newImage("MenuLevels/oneStarMenu.png", ImageFormat.ARGB4444);
         Assets.two_stars_menu = g.newImage("MenuLevels/twoStarsMenu.png", ImageFormat.ARGB4444);

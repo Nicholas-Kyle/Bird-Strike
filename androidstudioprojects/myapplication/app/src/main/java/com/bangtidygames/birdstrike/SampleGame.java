@@ -24,6 +24,10 @@ public class SampleGame extends AndroidGame {
     public static String map6;
     public static String map7;
     public static String map8;
+    public static String map9;
+    public static String map10;
+    //TODO add level maps
+
     boolean firstTimeCreate = true;
 
     @Override
@@ -57,6 +61,14 @@ public class SampleGame extends AndroidGame {
 
         InputStream is8 = getResources().openRawResource(R.raw.map8);
         map8 = convertStreamToString(is8);
+
+        InputStream is9 = getResources().openRawResource(R.raw.map9);
+        map9 = convertStreamToString(is9);
+
+        InputStream is10 = getResources().openRawResource(R.raw.map10);
+        map10 = convertStreamToString(is10);
+
+        //TODO add level maps
 
         return new SplashLoadingScreen(this);
 
