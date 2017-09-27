@@ -99,12 +99,11 @@ public class AndroidMusic implements Music, OnCompletionListener, OnSeekComplete
 
     @Override
     public void stop() {
-        if (this.mediaPlayer.isPlaying() == true){
             this.mediaPlayer.stop();
 
             synchronized (this) {
                 isPrepared = false;
-            }}
+            }
     }
 
     @Override
