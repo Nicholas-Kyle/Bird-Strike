@@ -68,6 +68,36 @@ public class HUD {
             b = Assets.birds_4;
         } else if (anInt == 5) {
             b = Assets.birds_5;
+        } else if (anInt == 6) {
+            b = Assets.birds_6;
+        } else if (anInt == 7) {
+            b = Assets.birds_7;
+        } else if (anInt == 8) {
+            b = Assets.birds_8;
+        } else if (anInt == 9) {
+            b = Assets.birds_9;
+        } else if (anInt == 10) {
+            b = Assets.birds_10;
+        } else if (anInt == 11) {
+            b = Assets.birds_11;
+        } else if (anInt == 12) {
+            b = Assets.birds_12;
+        } else if (anInt == 13) {
+            b = Assets.birds_13;
+        } else if (anInt == 14) {
+            b = Assets.birds_14;
+        } else if (anInt == 15) {
+            b = Assets.birds_15;
+        } else if (anInt == 16) {
+            b = Assets.birds_16;
+        } else if (anInt == 17) {
+            b = Assets.birds_17;
+        } else if (anInt == 18) {
+            b = Assets.birds_18;
+        } else if (anInt == 19) {
+            b = Assets.birds_19;
+        } else if (anInt == 20) {
+            b = Assets.birds_20;
         }
         return b;
     }

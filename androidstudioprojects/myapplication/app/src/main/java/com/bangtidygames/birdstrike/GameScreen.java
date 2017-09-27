@@ -32,7 +32,6 @@ public class GameScreen extends Screen {
 
     private Image currentSprite;
 
-    private Random rand;
     private int  n;
 
     private int pauseXPos = 15;
@@ -53,7 +52,9 @@ public class GameScreen extends Screen {
     public GameScreen(Game game, int levelNumber) {
         super(game);
 
-        // Defining a paint object
+        Assets.gameMusic.play();
+        Assets.gameMusic.setLooping(true);
+
         paint = new Paint();
         paint.setTextSize(30);
         paint.setTextAlign(Paint.Align.CENTER);
@@ -71,7 +72,7 @@ public class GameScreen extends Screen {
 
         currentSprite = Assets.bluebiplane;
 
-        rand = new Random();
+        Random rand = new Random();
         //Generates a random int between 1 and 50
         n = rand.nextInt(50) + 1;
 
@@ -107,13 +108,13 @@ public class GameScreen extends Screen {
             if (crashTime == 0) {
                 crashTime = System.nanoTime();
                 currentSprite = Assets.explosion;
+                //Assets.gameMusic.stop();
                 Assets.crash.play(0.60f);
             }
             if (System.nanoTime() > (crashTime + 250000000)) {
                 if (LoadSave.hearts != 0) {
                     LoadSave.hearts--;
                 }
-
                 LoadSave.saveHearts(game.getFileIO());
                 state = GameState.GameOver;
             }
@@ -136,16 +137,12 @@ public class GameScreen extends Screen {
                 }
             }
 
-
-            if (robot.isCaught()) {
-                state = GameState.GameOver;
-            }
-
             robot.update(deltaTime);
             levelManager.updateTiles();
             levelManager.updateBirds(deltaTime);
             levelManager.updateBackground();
             if (levelManager.isLevelComplete()) {
+           //     Assets.gameMusic.stop();
                 if (LoadSave.getStars(levelManager.getLevel()) == 2) {
                     if (robot.getBirdsHit() >= levelManager.getThreeStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 3);
@@ -284,7 +281,6 @@ public class GameScreen extends Screen {
     }
 
     private void nullify() {
-
         paint = null;
         robot = null;
         currentSprite = null;
@@ -358,14 +354,14 @@ public class GameScreen extends Screen {
 
     @Override
     public void pause() {
-        if (state == GameState.Running)
-            state = GameState.Paused;
+        if (state == GameState.Running) state = GameState.Paused;
+        Assets.gameMusic.pause();
     }
 
     @Override
     public void resume() {
-        if (state == GameState.Paused)
-            state = GameState.Running;
+        if (state == GameState.Paused) state = GameState.Running;
+        Assets.gameMusic.play();
     }
 
     @Override
@@ -379,10 +375,14 @@ public class GameScreen extends Screen {
     }
 
     private void goToMenu() {
+        Assets.gameMusic.setLooping(false);
+        Assets.gameMusic.stop();
         game.setScreen(new MainMenuScreen(game));
     }
 
     private void restartLevel(int level) {
+        Assets.gameMusic.setLooping(false);
+        Assets.gameMusic.stop();
         if (LoadSave.getHearts() < 1) {
             this.goToMenu();
         } else {

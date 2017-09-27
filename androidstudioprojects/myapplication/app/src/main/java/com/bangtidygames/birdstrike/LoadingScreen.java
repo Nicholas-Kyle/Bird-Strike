@@ -81,6 +81,21 @@ public class LoadingScreen extends Screen {
         Assets.birds_3 = g.newImage("HUD/bird_3.png", ImageFormat.ARGB4444);
         Assets.birds_4 = g.newImage("HUD/bird_4.png", ImageFormat.ARGB4444);
         Assets.birds_5 = g.newImage("HUD/bird_5.png", ImageFormat.ARGB4444);
+        Assets.birds_6 = g.newImage("HUD/bird_6.png", ImageFormat.ARGB4444);
+        Assets.birds_7 = g.newImage("HUD/bird_7.png", ImageFormat.ARGB4444);
+        Assets.birds_8 = g.newImage("HUD/bird_8.png", ImageFormat.ARGB4444);
+        Assets.birds_9 = g.newImage("HUD/bird_9.png", ImageFormat.ARGB4444);
+        Assets.birds_10 = g.newImage("HUD/bird_10.png", ImageFormat.ARGB4444);
+        Assets.birds_11 = g.newImage("HUD/bird_11.png", ImageFormat.ARGB4444);
+        Assets.birds_12 = g.newImage("HUD/bird_12.png", ImageFormat.ARGB4444);
+        Assets.birds_13 = g.newImage("HUD/bird_13.png", ImageFormat.ARGB4444);
+        Assets.birds_14 = g.newImage("HUD/bird_14.png", ImageFormat.ARGB4444);
+        Assets.birds_15 = g.newImage("HUD/bird_15.png", ImageFormat.ARGB4444);
+        Assets.birds_16 = g.newImage("HUD/bird_16.png", ImageFormat.ARGB4444);
+        Assets.birds_17 = g.newImage("HUD/bird_17.png", ImageFormat.ARGB4444);
+        Assets.birds_18 = g.newImage("HUD/bird_18.png", ImageFormat.ARGB4444);
+        Assets.birds_19 = g.newImage("HUD/bird_19.png", ImageFormat.ARGB4444);
+        Assets.birds_20 = g.newImage("HUD/bird_20.png", ImageFormat.ARGB4444);
 
         Assets.checkpoints_1 = g.newImage("HUD/checkpoints_1.png", ImageFormat.ARGB4444);
         Assets.checkpoints_2 = g.newImage("HUD/checkpoints_2.png", ImageFormat.ARGB4444);
@@ -160,6 +175,8 @@ public class LoadingScreen extends Screen {
 
         Assets.crash = game.getAudio().createSound("SFX/explode.ogg");
         Assets.birdSound = game.getAudio().createSound("SFX/bird.ogg");
+
+        Assets.gameMusic = game.getAudio().createMusic("gameMusic.ogg");
 
         LoadSave.load(game.getFileIO());
         LoadSave.loadStars(game.getFileIO());

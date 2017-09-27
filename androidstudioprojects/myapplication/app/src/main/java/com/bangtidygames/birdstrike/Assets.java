@@ -25,7 +25,8 @@ public class Assets {
     public static Image UI;
     public static Image hearts_1, hearts_2, hearts_3, hearts_4, hearts_5, hearts_6, hearts_7, hearts_8, hearts_9, hearts_10,
             hearts_11, hearts_12, hearts_13, hearts_14, hearts_15, hearts_16, hearts_17, hearts_18, hearts_19, hearts_20;
-    public static Image birds_0, birds_1, birds_2, birds_3, birds_4, birds_5;
+    public static Image birds_0, birds_1, birds_2, birds_3, birds_4, birds_5, birds_6, birds_7, birds_8, birds_9, birds_10,
+            birds_11, birds_12, birds_13, birds_14, birds_15, birds_16, birds_17, birds_18, birds_19, birds_20;
     public static Image checkpoints_1, checkpoints_2, checkpoints_3, checkpoints_4, checkpoints_5, checkpoints_6,
             checkpoints_7, checkpoints_8, checkpoints_9, checkpoints_10, checkpoints_11, checkpoints_12,
             checkpoints_13, checkpoints_14, checkpoints_15, checkpoints_16, checkpoints_17, checkpoints_18,
@@ -37,14 +38,16 @@ public class Assets {
             grass_12, grass_13, grass_14, grass_15, grass_16, grass_17, grass_18, grass_19, grass_20, grass_21, grass_22,
             grass_23, grass_24, grass_25, grass_26, grass_27;
     public static Sound crash, birdSound;
-    public static Music theme;
+    public static Music theme, gameMusic;
 
     public static void load(SampleGame sampleGame) {
         // TODO Auto-generated method stub
+        /**
         theme = sampleGame.getAudio().createMusic("menutheme.mp3");
         theme.setLooping(true);
         theme.setVolume(0.85f);
         theme.play();
+         */
     }
 
 }
