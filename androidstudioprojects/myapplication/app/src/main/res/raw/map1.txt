@@ -12,10 +12,10 @@
 
 
 
-
-66663aaae66666666661hggggg9d6663aae66666
-ggggf7772ggggggggggggggggggggggf772ggggg
+        s          nq
+6666666666666666666666666666666666666666
+gggggggggggggggggggggggggggggggggggggggg
 ! Number of Checkpoints
-3
+1
 ! Robot start tile from top
-5
+d
