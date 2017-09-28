@@ -55,7 +55,7 @@ public class LevelManager {
     }
 
     private void setRobotY(int height) {
-        robot.setCenterY(height*32-18);
+        robot.setCenterY(height*32-17);
     }
 
     private void loadBackground(int level) {
@@ -144,6 +144,22 @@ public class LevelManager {
 
     private void loadBirds(int level) {
         //TODO check when setting new level
+        if (level == 1) {
+
+            Bird bird = new Bird(920, 320, (float) 1.36);
+            birdArray.add(bird);
+
+            Bird bird2 = new Bird(1000, 380, (float) 1.36);
+            birdArray.add(bird2);
+
+            Bird bird3 = new Bird(1100, 380, (float) 1.36);
+            birdArray.add(bird3);
+
+            this.oneStar=0;
+            this.twoStars=1;
+            this.threeStars=3;
+        }
+
         if (level == 2) {
 
             Bird bird = new Bird(920, 200, (float)1.36);
@@ -173,18 +189,21 @@ public class LevelManager {
             Bird bird2 = new Bird(1690, 140, (float) 1.36);
             birdArray.add(bird2);
 
-            Bird bird3 = new Bird(2050, 200, (float) 1.36);
+            Bird bird3 = new Bird(1900, 5, (float) 1.36);
             birdArray.add(bird3);
 
-            Bird bird4 = new Bird(2270, 250, (float) 1.36);
+            Bird bird4 = new Bird(2050, 200, (float) 1.36);
             birdArray.add(bird4);
 
-            Bird bird5 = new Bird(3500, 350, (float) 1.36);
+            Bird bird5 = new Bird(2270, 250, (float) 1.36);
             birdArray.add(bird5);
 
+            Bird bird6 = new Bird(3500, 350, (float) 1.36);
+            birdArray.add(bird6);
+
             this.oneStar=0;
-            this.twoStars=3;
-            this.threeStars=5;
+            this.twoStars=4;
+            this.threeStars=6;
 
         } else if (level == 10) {
 
@@ -287,6 +306,10 @@ public class LevelManager {
 
     public void checkpointPassed() {
         this.checkpoints--;
+        if (checkpoints == 1){
+            Assets.gameMusic.setVolume(.85f);
+            Assets.gameMusic.play();
+        }
         if (checkpoints == 0) {
             this.levelComplete = true;
         }

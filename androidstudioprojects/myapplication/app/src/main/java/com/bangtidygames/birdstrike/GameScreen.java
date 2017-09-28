@@ -108,7 +108,6 @@ public class GameScreen extends Screen {
             if (crashTime == 0) {
                 crashTime = System.nanoTime();
                 currentSprite = Assets.explosion;
-                //Assets.gameMusic.stop();
                 Assets.crash.play(0.60f);
             }
             if (System.nanoTime() > (crashTime + 250000000)) {
@@ -142,7 +141,6 @@ public class GameScreen extends Screen {
             levelManager.updateBirds(deltaTime);
             levelManager.updateBackground();
             if (levelManager.isLevelComplete()) {
-           //     Assets.gameMusic.stop();
                 if (LoadSave.getStars(levelManager.getLevel()) == 2) {
                     if (robot.getBirdsHit() >= levelManager.getThreeStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 3);
@@ -381,8 +379,6 @@ public class GameScreen extends Screen {
     }
 
     private void restartLevel(int level) {
-        Assets.gameMusic.setLooping(false);
-        Assets.gameMusic.stop();
         if (LoadSave.getHearts() < 1) {
             this.goToMenu();
         } else {

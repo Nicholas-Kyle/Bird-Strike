@@ -18,12 +18,14 @@ public class Robot {
     private boolean tooHigh = false;
     private boolean caught = false;
     private boolean caughtOpponent = false;
+    private boolean grounded = true;
+    private boolean stillGrounded = true;
 
     private int birdsHit = 0;
 
     private int centerX;
     private int centerY;
-    private float speedY = (float)0.2;
+    private float speedY = (float)0;
     private float invertSpeedY = (float)3.5;
     private int points;
 
@@ -45,6 +47,12 @@ public class Robot {
 
     public void update(float deltaTime) {
 
+        if (!stillGrounded) {
+            grounded = false;
+        }
+
+        stillGrounded = false;
+
         if (speedX<=TOPSPEEDX){
             speedX += .1;
         }
@@ -58,29 +66,31 @@ public class Robot {
 
         // Updates Y Position
         //check delta adjust
-        changeY = speedY * deltaTime;
-        if(changeY>100){
-            changeY = 0;
-        }
+        if (!grounded) {
+            changeY = speedY * deltaTime;
+            if (changeY > 100) {
+                changeY = 0;
+            }
 
-        centerY -= changeY;
+            centerY -= changeY;
 
-        if(centerY < -50){
-            tooHigh = true;
-        }
+            if (centerY < -50) {
+                tooHigh = true;
+            }
 
-        // Y position logic
+            // Y position logic
 
-        boolean maxSpeedY = speedY >= TOPSPEEDY;
+            boolean maxSpeedY = speedY >= TOPSPEEDY;
 
-        boolean minSpeedY = speedY <= -BOTTOMSPEEDY;
+            boolean minSpeedY = speedY <= -BOTTOMSPEEDY;
 
-        if (!movingUp && !minSpeedY) {
-            speedY -= .23;
-        }
+            if (!movingUp && !minSpeedY) {
+                speedY -= .23;
+            }
 
-        if(movingUp && !maxSpeedY) {
-            speedY += .35;
+            if (movingUp && !maxSpeedY) {
+                speedY += .35;
+            }
         }
 
 
@@ -105,6 +115,9 @@ public class Robot {
         }
         if (invertSpeedY==(float) 3.5){
             invertSpeedY = (float) (speedY * (-0.6));
+        } else if (invertSpeedY<=0.1){
+            invertSpeedY = (float) 0;
+            this.setGrounded(true);
         } else {
             invertSpeedY = (float) (invertSpeedY * 0.6);
         }
@@ -129,6 +142,7 @@ public class Robot {
 
     public void moveUp(){
         invertSpeedY = (float) 3.5;
+        setGrounded(false);
         setMovingUp(true);
     }
 
@@ -226,5 +240,21 @@ public class Robot {
 
     public void setCaughtOpponent(boolean caughtOpponent) {
         this.caughtOpponent = caughtOpponent;
+    }
+
+    public boolean isGrounded() {
+        return grounded;
+    }
+
+    public void setGrounded(boolean grounded) {
+        this.grounded = grounded;
+    }
+
+    public boolean isStillGrounded() {
+        return stillGrounded;
+    }
+
+    public void setStillGrounded(boolean stillGrounded) {
+        this.stillGrounded = stillGrounded;
     }
 }

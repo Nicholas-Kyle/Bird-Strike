@@ -114,6 +114,17 @@ public class Tile {
             tileX += levelLength;
         }
 
+        if (robot.isGrounded()){
+            if (type == 1 || type == 3 || type == 4 || type == 6 || type == 8 || type == 13 ||
+                    type == 14 || type == 18) {
+                r.set((int) tileX, tileY, (int) tileX + 32, tileY + 6);
+                if (Rect.intersects(r, Robot.rect3)) {
+                    robot.setGrounded(true);
+                }
+            }
+        }
+        //set a line on the left hand side of blocks (that will be placed on the left)
+        // to cause a collision instead of bounce
         if (type == 1 || type == 3 || type == 4 || type == 6 || type == 8 || type == 13 ||
                 type == 14 || type == 18) {
             r.set((int) tileX, tileY, (int) tileX + 32, tileY + 8);
@@ -203,7 +214,7 @@ public class Tile {
             if (Rect.intersects(r, Robot.rect) || Rect.intersects(r, Robot.rect2)) {
                 if (!levelManager.isFinishPost()) {
                     levelManager.setFinishPost(true);
-                    levelManager.addLap();
+                    levelManager.checkpointPassed();
                 }
             } else {
                 levelManager.setFinishPost(false);

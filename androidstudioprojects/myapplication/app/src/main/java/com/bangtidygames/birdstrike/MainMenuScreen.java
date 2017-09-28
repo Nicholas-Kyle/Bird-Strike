@@ -334,23 +334,23 @@ public class MainMenuScreen extends Screen {
         int gapY = 170;
         MenuLevelPosition level1 = new MenuLevelPosition(x, y, 1, 0);
         LevelPositions.add(level1);
-        MenuLevelPosition level2 = new MenuLevelPosition((x+gapX), (y+gapY), 2, 1);
+        MenuLevelPosition level2 = new MenuLevelPosition((x+gapX), (y+gapY), 2, 3);
         LevelPositions.add(level2);
-        MenuLevelPosition level3 = new MenuLevelPosition((x+gapX*2), y, 3, 3);
+        MenuLevelPosition level3 = new MenuLevelPosition((x+gapX*2), y, 3, 4);
         LevelPositions.add(level3);
-        MenuLevelPosition level4 = new MenuLevelPosition((x+gapX*3), (y+gapY), 4, 5);
+        MenuLevelPosition level4 = new MenuLevelPosition((x+gapX*3), (y+gapY), 4, 6);
         LevelPositions.add(level4);
-        MenuLevelPosition level5 = new MenuLevelPosition((x+gapX*4), y, 5, 7);
+        MenuLevelPosition level5 = new MenuLevelPosition((x+gapX*4), y, 5, 8);
         LevelPositions.add(level5);
-        MenuLevelPosition level6 = new MenuLevelPosition((x+gapX*5), (y+gapY), 6, 7);
+        MenuLevelPosition level6 = new MenuLevelPosition((x+gapX*5), (y+gapY), 6, 8);
         LevelPositions.add(level6);
-        MenuLevelPosition level7 = new MenuLevelPosition((x+gapX*6), y, 7, 10);
+        MenuLevelPosition level7 = new MenuLevelPosition((x+gapX*6), y, 7, 11);
         LevelPositions.add(level7);
-        MenuLevelPosition level8 = new MenuLevelPosition((x+gapX*7), (y+gapY), 8, 10);
+        MenuLevelPosition level8 = new MenuLevelPosition((x+gapX*7), (y+gapY), 8, 11);
         LevelPositions.add(level8);
-        MenuLevelPosition level9 = new MenuLevelPosition((x+gapX*8), y, 9, 12);
+        MenuLevelPosition level9 = new MenuLevelPosition((x+gapX*8), y, 9, 14);
         LevelPositions.add(level9);
-        MenuLevelPosition level10 = new MenuLevelPosition((x+gapX*9), (y+gapY), 10, 12);
+        MenuLevelPosition level10 = new MenuLevelPosition((x+gapX*9), (y+gapY), 10, 15);
         LevelPositions.add(level10);
     }
 
