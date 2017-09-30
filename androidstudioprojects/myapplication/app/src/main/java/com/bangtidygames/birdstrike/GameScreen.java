@@ -30,6 +30,8 @@ public class GameScreen extends Screen {
     private float startTime = 0;
     private float crashTime = 0;
 
+    private float volume = 1f;
+
     private Image currentSprite;
 
     private int  n;
@@ -52,6 +54,11 @@ public class GameScreen extends Screen {
     public GameScreen(Game game, int levelNumber) {
         super(game);
 
+        if(LoadSave.soundEnabled){
+            Assets.gameMusic.setVolume(volume);
+        } else {
+            Assets.gameMusic.setVolume(0f);
+        }
         Assets.gameMusic.play();
         Assets.gameMusic.setLooping(true);
 
@@ -108,13 +115,15 @@ public class GameScreen extends Screen {
             if (crashTime == 0) {
                 crashTime = System.nanoTime();
                 currentSprite = Assets.explosion;
-                Assets.crash.play(0.60f);
+                if (LoadSave.soundEnabled) {
+                    Assets.crash.play(volume);
+                }
             }
             if (System.nanoTime() > (crashTime + 250000000)) {
                 if (LoadSave.hearts != 0) {
                     LoadSave.hearts--;
                 }
-                LoadSave.saveHearts(game.getFileIO());
+                LoadSave.save(game.getFileIO());
                 state = GameState.GameOver;
             }
         } else {
@@ -144,26 +153,20 @@ public class GameScreen extends Screen {
                 if (LoadSave.getStars(levelManager.getLevel()) == 2) {
                     if (robot.getBirdsHit() >= levelManager.getThreeStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 3);
-                        LoadSave.saveStars(game.getFileIO());
                     }
                 } else if (LoadSave.getStars(levelManager.getLevel()) == 1) {
                     if (robot.getBirdsHit() >= levelManager.getThreeStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 3);
-                        LoadSave.saveStars(game.getFileIO());
                     } else if (robot.getBirdsHit() >= levelManager.getTwoStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 2);
-                        LoadSave.saveStars(game.getFileIO());
                     }
                 } else if (LoadSave.getStars(levelManager.getLevel()) == 0) {
                     if (robot.getBirdsHit() >= levelManager.getThreeStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 3);
-                        LoadSave.saveStars(game.getFileIO());
                     } else if (robot.getBirdsHit() >= levelManager.getTwoStars()) {
                         LoadSave.addStars(levelManager.getLevel(), 2);
-                        LoadSave.saveStars(game.getFileIO());
                     } else if (robot.getBirdsHit() >= levelManager.getOneStar()) {
                         LoadSave.addStars(levelManager.getLevel(), 1);
-                        LoadSave.saveStars(game.getFileIO());
                     }
                 }
                 state = GameState.Complete;
@@ -181,10 +184,9 @@ public class GameScreen extends Screen {
         int len = touchEvents.size();
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
-            if (event.type == TouchEvent.TOUCH_DOWN) {
+            if (event.type == TouchEvent.TOUCH_UP) {
                 liftOnce = true;
-            }
-            if (event.type == TouchEvent.TOUCH_UP && liftOnce) {
+            } if (event.type == TouchEvent.TOUCH_DOWN && liftOnce) {
                 if (inBounds(event, pauseUIResumeXPos, pauseUIResumeYPos, buttonWidth,
                         buttonHeight)) {
                     resume();
@@ -196,6 +198,14 @@ public class GameScreen extends Screen {
                         buttonHeight)) {
                     nullify();
                     goToMenu();
+                } else if (inBounds(event, pauseXPos, pauseYPos, 70, 71)){
+                    if(LoadSave.soundEnabled){
+                        LoadSave.soundEnabled=false;
+                        Assets.gameMusic.setVolume(0f);
+                    } else {
+                        LoadSave.soundEnabled=true;
+                        Assets.gameMusic.setVolume(volume);
+                    }
                 }
             }
         }
@@ -284,7 +294,6 @@ public class GameScreen extends Screen {
         currentSprite = null;
 //TODO add additional null as needed
         System.gc();
-
     }
 
     private void drawReadyUI() {
@@ -309,7 +318,11 @@ public class GameScreen extends Screen {
         g.drawImage(Assets.resumeButton, pauseUIResumeXPos, pauseUIResumeYPos);
         g.drawImage(Assets.restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
         g.drawImage(Assets.menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
-
+        if(LoadSave.soundEnabled){
+            g.drawImage(Assets.soundOnButton, pauseXPos, pauseYPos);
+        } else {
+         g.drawImage(Assets.soundOffButton, pauseXPos, pauseYPos);
+        }
     }
 
     private void drawGameOverUI() {
@@ -338,7 +351,7 @@ public class GameScreen extends Screen {
     private void drawCompleteUI() {
         Graphics g = game.getGraphics();
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("You hit " + robot.getBirdsHit() + " birds", 400, 35, paint);
+        g.drawString("Well done, you hit " + robot.getBirdsHit() + " birds", 400, 35, paint);
         if (LoadSave.getStars(levelManager.getLevel())==1) {
             g.drawImage(Assets.one_star_complete, 275, pauseUIRestartYPos - 125);
         } else if (LoadSave.getStars(levelManager.getLevel())==2) {
@@ -353,13 +366,13 @@ public class GameScreen extends Screen {
     @Override
     public void pause() {
         if (state == GameState.Running) state = GameState.Paused;
-        Assets.gameMusic.pause();
+            Assets.gameMusic.pause();
     }
 
     @Override
     public void resume() {
-        if (state == GameState.Paused) state = GameState.Running;
         Assets.gameMusic.play();
+        if (state == GameState.Paused) state = GameState.Running;
     }
 
     @Override
@@ -373,13 +386,13 @@ public class GameScreen extends Screen {
     }
 
     private void goToMenu() {
-        Assets.gameMusic.setLooping(false);
+        LoadSave.save(game.getFileIO());
         Assets.gameMusic.stop();
         game.setScreen(new MainMenuScreen(game));
     }
 
     private void restartLevel(int level) {
-        if (LoadSave.getHearts() < 1) {
+        if (LoadSave.hearts < 1) {
             this.goToMenu();
         } else {
             game.setScreen(new GameScreen(game, level));

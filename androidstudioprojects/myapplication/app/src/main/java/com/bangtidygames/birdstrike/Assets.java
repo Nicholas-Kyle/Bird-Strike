@@ -16,7 +16,7 @@ public class Assets {
     public static Image level_locked, level_1, level_2, level_3, level_4, level_5, level_6, level_7, level_8,
             level_9, level_10;
     //TODO add levels
-    public static Image setting, pause, menuButton, restartButton, resumeButton, star;
+    public static Image soundOnButton, soundOffButton, pause, menuButton, restartButton, resumeButton, star;
     public static Image one_star_menu, two_stars_menu, three_stars_menu;
     public static Image bluebiplane, explosion;
     public static Image brown_1, brown_2, brown_3, brown_4, brown_5, brown_6, brown_7, brown_8, brown_9,
@@ -38,16 +38,10 @@ public class Assets {
             grass_12, grass_13, grass_14, grass_15, grass_16, grass_17, grass_18, grass_19, grass_20, grass_21, grass_22,
             grass_23, grass_24, grass_25, grass_26, grass_27;
     public static Sound crash, birdSound;
-    public static Music theme, gameMusic;
+    public static Music gameMusic;
 
     public static void load(SampleGame sampleGame) {
         // TODO Auto-generated method stub
-        /**
-        theme = sampleGame.getAudio().createMusic("menutheme.mp3");
-        theme.setLooping(true);
-        theme.setVolume(0.85f);
-        theme.play();
-         */
     }
 
 }

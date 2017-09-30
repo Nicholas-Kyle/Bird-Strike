@@ -22,6 +22,10 @@ public class MainMenuScreen extends Screen {
     private boolean dragging = false;
     private boolean liftOnce = false;
 
+    private boolean insufficientStars = false;
+    private float insufficientStarsTime;
+    private int insufficientStarsLevel;
+
     private int totalStars;
 
     private int x = 0;
@@ -29,10 +33,11 @@ public class MainMenuScreen extends Screen {
     private int currentDrag;
     private int drag;
 
-    private int settingsX = 15;
-    private int settingsY = 394;
+    private int soundButtonX = 15;
+    private int soundButtonY = 394;
 
     private Paint paint;
+    private Paint paint2;
 
     private Set<MenuLevelPosition> LevelPositions= new HashSet<>();
 
@@ -44,9 +49,16 @@ public class MainMenuScreen extends Screen {
         paint.setAntiAlias(true);
         paint.setColor(Color.BLACK);
 
+        paint2 = new Paint();
+        paint2.setTextSize(20);
+        paint2.setAntiAlias(true);
+        paint2.setTextAlign(Paint.Align.CENTER);
+        paint2.setColor(Color.BLACK);
+
         this.setLevelPositions();
         this.setMaxMenuX();
         this.setTotalStars();
+        this.setX();
     }
 
     public MainMenuScreen(Game game, int xPos) {
@@ -56,6 +68,12 @@ public class MainMenuScreen extends Screen {
         paint.setTextSize(30);
         paint.setAntiAlias(true);
         paint.setColor(Color.BLACK);
+
+        paint2 = new Paint();
+        paint2.setTextSize(20);
+        paint2.setAntiAlias(true);
+        paint2.setTextAlign(Paint.Align.CENTER);
+        paint2.setColor(Color.BLACK);
 
         this.setLevelPositions();
         this.setMaxMenuX();
@@ -87,19 +105,25 @@ public class MainMenuScreen extends Screen {
                 if (dragging == false && liftOnce == true) {
                     for (MenuLevelPosition level : LevelPositions) {
                         if (inBounds(event, level.getX() - x, level.getY(), 119, 150)) {
-                        if (totalStars >= level.getStarsToUnlock()) {
-                            if (LoadSave.getHearts() != 0) {
-                                selectLevel(level.getLevelNumber());
+                            if (totalStars >= level.getStarsToUnlock()) {
+                                if (LoadSave.hearts != 0) {
+                                    selectLevel(level.getLevelNumber());
+                                } else {
+                                    //TODO add you must wait x amount of time for hearts to reload
+                                }
                             } else {
-                                //TODO add you must wait x amount of time for hearts to reload
+                                insufficientStarsTime = System.nanoTime();
+                                insufficientStarsLevel = level.getLevelNumber();
+                                insufficientStars = true;
                             }
                         }
-                    } else {
-                            //TODO display you need x stars to unlock
+                    }
+                    if (inBounds(event, soundButtonX, soundButtonY, 70, 71)){
+                        if(LoadSave.soundEnabled){
+                            LoadSave.soundEnabled=false;
+                        } else {
+                            LoadSave.soundEnabled=true;
                         }
-                }
-                    if (inBounds(event, settingsX, settingsY, 70, 71)){
-                        game.setScreen(new SettingsScreen(game, x));
                     }
                 } else {
                     x += currentDrag;
@@ -128,202 +152,270 @@ public class MainMenuScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        int menuPos = x+currentDrag;
+        int menuPos = x + currentDrag;
         if (menuPos > 0 && menuPos < maxMenuX) {
-            g.drawImage(Assets.menu_forest, (0-menuPos), 0);
-            g.drawImage(Assets.menu_forest, (1280-menuPos), 0);
-            g.drawImage(Assets.menu_forest, (2560-menuPos), 0);
-            g.drawImage(Assets.menu_forest, (3840-menuPos), 0);
+            g.drawImage(Assets.menu_forest, (0 - menuPos), 0);
+            g.drawImage(Assets.menu_forest, (1280 - menuPos), 0);
+            g.drawImage(Assets.menu_forest, (2560 - menuPos), 0);
+            g.drawImage(Assets.menu_forest, (3840 - menuPos), 0);
             for (MenuLevelPosition level : LevelPositions) {
-                if(level.getLevelNumber() == 1) {
+                if (level.getLevelNumber() == 1) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_1;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_1;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
-                } else if(level.getLevelNumber() == 2) {
+                } else if (level.getLevelNumber() == 2) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_2;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_2;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
-                } else if(level.getLevelNumber() == 3) {
+                } else if (level.getLevelNumber() == 3) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_3;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_3;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
-                } else if(level.getLevelNumber() == 4) {
+                } else if (level.getLevelNumber() == 4) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_4;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_4;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
-                } else if(level.getLevelNumber() == 5) {
+                } else if (level.getLevelNumber() == 5) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_5;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_5;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
-                } else if(level.getLevelNumber() == 6) {
+                } else if (level.getLevelNumber() == 6) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_6;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_6;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
-                } else if(level.getLevelNumber() == 7) {
+                } else if (level.getLevelNumber() == 7) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_7;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_7;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
-                } else if(level.getLevelNumber() == 8) {
+                } else if (level.getLevelNumber() == 8) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_8;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_8;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
-                } else if(level.getLevelNumber() == 9) {
+                } else if (level.getLevelNumber() == 9) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_9;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_9;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
-                } else if(level.getLevelNumber() == 10) {
+                } else if (level.getLevelNumber() == 10) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_10;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_10;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
                 }
                 //TODO add levels
-                if (LoadSave.stars[level.getLevelNumber()-1] == 1){
+                if (LoadSave.stars[level.getLevelNumber() - 1] == 1) {
                     g.drawImage(Assets.one_star_menu, level.getX() - menuPos, level.getY());
-                } else if (LoadSave.stars[level.getLevelNumber()-1] == 2) {
+                } else if (LoadSave.stars[level.getLevelNumber() - 1] == 2) {
                     g.drawImage(Assets.two_stars_menu, level.getX() - menuPos, level.getY());
-                } else if (LoadSave.stars[level.getLevelNumber()-1] == 3) {
+                } else if (LoadSave.stars[level.getLevelNumber() - 1] == 3) {
                     g.drawImage(Assets.three_stars_menu, level.getX() - menuPos, level.getY());
                 }
+
             }
-        } else if (menuPos <= 0){
+
+            if (insufficientStars) {
+                if (System.nanoTime() < (insufficientStarsTime + 1500000000)) {
+                    int x = 0;
+                    int y = 0;
+                    int starsRequired = 0;
+                    for (MenuLevelPosition level : LevelPositions) {
+                        if (insufficientStarsLevel == level.getLevelNumber()) {
+                            x = level.getX()+60;
+                            y = level.getY()-10;
+                            starsRequired = level.getStarsToUnlock();
+                        }
+                    }
+                    g.drawString("" + starsRequired + " stars required", x - menuPos, y, paint2);
+                } else {
+                    insufficientStars = false;
+                }
+            }
+
+        } else if (menuPos <= 0) {
             g.drawImage(Assets.menu_forest, (0), 0);
             for (MenuLevelPosition level : LevelPositions) {
-                if(level.getLevelNumber() == 1) {
+                if (level.getLevelNumber() == 1) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_1;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_1;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX(), level.getY());
-                } else if(level.getLevelNumber() == 2) {
+                } else if (level.getLevelNumber() == 2) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_2;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_2;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX(), level.getY());
-                } else if(level.getLevelNumber() == 3) {
+                } else if (level.getLevelNumber() == 3) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_3;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_3;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX(), level.getY());
-                } else if(level.getLevelNumber() == 4) {
+                } else if (level.getLevelNumber() == 4) {
                     Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_4;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_4;
                     } else {
-                        image=Assets.level_locked;
+                        image = Assets.level_locked;
                     }
                     g.drawImage(image, level.getX(), level.getY());
                 }
-                if (LoadSave.stars[level.getLevelNumber()-1] == 1){
+                if (LoadSave.stars[level.getLevelNumber() - 1] == 1) {
                     g.drawImage(Assets.one_star_menu, level.getX(), level.getY());
-                } else if (LoadSave.stars[level.getLevelNumber()-1] == 2) {
+                } else if (LoadSave.stars[level.getLevelNumber() - 1] == 2) {
                     g.drawImage(Assets.two_stars_menu, level.getX(), level.getY());
-                } else if (LoadSave.stars[level.getLevelNumber()-1] == 3) {
+                } else if (LoadSave.stars[level.getLevelNumber() - 1] == 3) {
                     g.drawImage(Assets.three_stars_menu, level.getX(), level.getY());
                 }
             }
-        } else if (menuPos >= maxMenuX){
-            g.drawImage(Assets.menu_forest, (0-maxMenuX), 0);
-            g.drawImage(Assets.menu_forest, (1280-maxMenuX), 0);
-            g.drawImage(Assets.menu_forest, (2560-maxMenuX), 0);
-            g.drawImage(Assets.menu_forest, (3840-maxMenuX), 0);
-            for (MenuLevelPosition level : LevelPositions) {
-                if(level.getLevelNumber() == 7) {
-                    Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_7;
-                    } else {
-                        image=Assets.level_locked;
+
+            if (insufficientStars) {
+                if (System.nanoTime() < (insufficientStarsTime + 1500000000)) {
+                    int x = 0;
+                    int y = 0;
+                    int starsRequired = 0;
+                    for (MenuLevelPosition level : LevelPositions) {
+                        if (insufficientStarsLevel == level.getLevelNumber()) {
+                            x = level.getX()+60;
+                            y = level.getY()-10;
+                            starsRequired = level.getStarsToUnlock();
+                        }
                     }
-                    g.drawImage(image, level.getX()-maxMenuX, level.getY());
-                } else if(level.getLevelNumber() == 8) {
-                    Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_8;
-                    } else {
-                        image=Assets.level_locked;
-                    }
-                    g.drawImage(image, level.getX()-maxMenuX, level.getY());
-                } else if(level.getLevelNumber() == 9) {
-                    Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_9;
-                    } else {
-                        image=Assets.level_locked;
-                    }
-                    g.drawImage(image, level.getX()-maxMenuX, level.getY());
-                } else if(level.getLevelNumber() == 10) {
-                    Image image;
-                    if(totalStars>=level.getStarsToUnlock()){
-                        image=Assets.level_10;
-                    } else {
-                        image=Assets.level_locked;
-                    }
-                    g.drawImage(image, level.getX()-maxMenuX, level.getY());
+                    g.drawString("" + starsRequired + " stars required", x, y, paint2);
+                } else {
+                    insufficientStars = false;
                 }
-                if (LoadSave.stars[level.getLevelNumber()-1] == 1){
-                    g.drawImage(Assets.one_star_menu, level.getX()-maxMenuX, level.getY());
-                } else if (LoadSave.stars[level.getLevelNumber()-1] == 2) {
-                    g.drawImage(Assets.two_stars_menu, level.getX()-maxMenuX, level.getY());
-                } else if (LoadSave.stars[level.getLevelNumber()-1] == 3) {
-                    g.drawImage(Assets.three_stars_menu, level.getX()-maxMenuX, level.getY());
+            }
+
+        } else if (menuPos >= maxMenuX) {
+            g.drawImage(Assets.menu_forest, (0 - maxMenuX), 0);
+            g.drawImage(Assets.menu_forest, (1280 - maxMenuX), 0);
+            g.drawImage(Assets.menu_forest, (2560 - maxMenuX), 0);
+            g.drawImage(Assets.menu_forest, (3840 - maxMenuX), 0);
+            for (MenuLevelPosition level : LevelPositions) {
+                if (level.getLevelNumber() == 7) {
+                    Image image;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_7;
+                    } else {
+                        image = Assets.level_locked;
+                    }
+                    g.drawImage(image, level.getX() - maxMenuX, level.getY());
+                } else if (level.getLevelNumber() == 8) {
+                    Image image;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_8;
+                    } else {
+                        image = Assets.level_locked;
+                    }
+                    g.drawImage(image, level.getX() - maxMenuX, level.getY());
+                } else if (level.getLevelNumber() == 9) {
+                    Image image;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_9;
+                    } else {
+                        image = Assets.level_locked;
+                    }
+                    g.drawImage(image, level.getX() - maxMenuX, level.getY());
+                } else if (level.getLevelNumber() == 10) {
+                    Image image;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_10;
+                    } else {
+                        image = Assets.level_locked;
+                    }
+                    g.drawImage(image, level.getX() - maxMenuX, level.getY());
+                }
+                if (LoadSave.stars[level.getLevelNumber() - 1] == 1) {
+                    g.drawImage(Assets.one_star_menu, level.getX() - maxMenuX, level.getY());
+                } else if (LoadSave.stars[level.getLevelNumber() - 1] == 2) {
+                    g.drawImage(Assets.two_stars_menu, level.getX() - maxMenuX, level.getY());
+                } else if (LoadSave.stars[level.getLevelNumber() - 1] == 3) {
+                    g.drawImage(Assets.three_stars_menu, level.getX() - maxMenuX, level.getY());
+                }
+            }
+
+            if (insufficientStars) {
+                if (System.nanoTime() < (insufficientStarsTime + 1500000000)) {
+                    int x = 0;
+                    int y = 0;
+                    int starsRequired = 0;
+                    for (MenuLevelPosition level : LevelPositions) {
+                        if (insufficientStarsLevel == level.getLevelNumber()) {
+                            x = level.getX()+60;
+                            y = level.getY()-10;
+                            starsRequired = level.getStarsToUnlock();
+                        }
+                    }
+                    g.drawString("" + starsRequired + " stars required", x - maxMenuX, y, paint2);
+                } else {
+                    insufficientStars = false;
                 }
             }
         }
-        g.drawImage(Assets.setting, settingsX, settingsY);
+
+
+        if (LoadSave.soundEnabled) {
+            g.drawImage(Assets.soundOnButton, soundButtonX, soundButtonY);
+        } else {
+            g.drawImage(Assets.soundOffButton, soundButtonX, soundButtonY);
+        }
         g.drawImage(Assets.star, 15, 8);
-        g.drawString("x "+ totalStars, 67, 44, paint);
+        g.drawString("x " + totalStars, 67, 44, paint);
 
     }
 
     private void selectLevel(int level) {
+        LoadSave.level = level;
+        LoadSave.save(game.getFileIO());
+        Assets.crash = game.getAudio().createSound("SFX/explode.ogg");
+        Assets.birdSound = game.getAudio().createSound("SFX/bird.ogg");
+        Assets.gameMusic = game.getAudio().createMusic("gameMusic.ogg");
         game.setScreen(new GameScreen(game, level));
     }
 
@@ -362,6 +454,17 @@ public class MainMenuScreen extends Screen {
             }
         }
         maxMenuX = greatestX-631;
+    }
+
+    private void setX(){
+        int l = LoadSave.level-1;
+        if (l >= 2){
+            for (MenuLevelPosition level : LevelPositions) {
+                if (level.levelNumber == l){
+                    x = level.getX()-50;
+                }
+            }
+        }
     }
 
     private void setTotalStars(){

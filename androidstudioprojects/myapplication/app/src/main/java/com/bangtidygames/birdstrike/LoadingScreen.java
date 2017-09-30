@@ -43,7 +43,8 @@ public class LoadingScreen extends Screen {
         Assets.two_stars_complete = g.newImage("twoStarsComplete.png", ImageFormat.ARGB4444);
         Assets.three_stars_complete = g.newImage("threeStarsComplete.png", ImageFormat.ARGB4444);
 
-        Assets.setting = g.newImage("MenuLevels/settings.png", ImageFormat.ARGB4444);
+        Assets.soundOnButton = g.newImage("soundOnButton.png", ImageFormat.ARGB4444);
+        Assets.soundOffButton = g.newImage("soundOffButton.png", ImageFormat.ARGB4444);
         Assets.star = g.newImage("MenuLevels/star.png", ImageFormat.ARGB4444);
         Assets.pause = g.newImage("pauseButton.png", ImageFormat.ARGB4444);
         Assets.menuButton = g.newImage("menuButton.png", ImageFormat.ARGB4444);
@@ -173,17 +174,10 @@ public class LoadingScreen extends Screen {
         Assets.grass_26 = g.newImage("grassTileset/26.png", ImageFormat.ARGB4444);
         Assets.grass_27 = g.newImage("grassTileset/27.png", ImageFormat.ARGB4444);
 
-        Assets.crash = game.getAudio().createSound("SFX/explode.ogg");
-        Assets.birdSound = game.getAudio().createSound("SFX/bird.ogg");
-
-        Assets.gameMusic = game.getAudio().createMusic("gameMusic.ogg");
-
         LoadSave.load(game.getFileIO());
-        LoadSave.loadStars(game.getFileIO());
-        LoadSave.loadHearts(game.getFileIO());
         //TODO remove next 2 lines, replace with check time elapsed in order to add hearts
         if (LoadSave.hearts<1){
-            LoadSave.setHearts(20);
+            LoadSave.hearts=20;
         }
         game.setScreen(new MainMenuScreen(game));
     }

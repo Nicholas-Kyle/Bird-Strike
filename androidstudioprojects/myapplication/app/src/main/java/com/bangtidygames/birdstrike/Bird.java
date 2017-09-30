@@ -47,7 +47,9 @@ public class Bird {
                 alive = false;
                 robot.hitBird();
                 //TODO adjust volume in settings
-                Assets.birdSound.play(0.60f);
+                if(LoadSave.soundEnabled) {
+                    Assets.birdSound.play(1f);
+                }
             }
         }
         this.updateImages();
