@@ -12,6 +12,8 @@ import com.bangtidygames.framework.Image;
 import com.bangtidygames.framework.Input.TouchEvent;
 import com.bangtidygames.framework.Screen;
 
+import static com.bangtidygames.birdstrike.Assets.*;
+
 /**
  * Created by Nick on 15/09/2017.
  */
@@ -29,8 +31,6 @@ public class GameScreen extends Screen {
 
     private float startTime = 0;
     private float crashTime = 0;
-
-    private float volume = 1f;
 
     private Image currentSprite;
 
@@ -54,13 +54,9 @@ public class GameScreen extends Screen {
     public GameScreen(Game game, int levelNumber) {
         super(game);
 
-        if(LoadSave.soundEnabled){
-            Assets.gameMusic.setVolume(volume);
-        } else {
-            Assets.gameMusic.setVolume(0f);
+        if (LoadSave.soundEnabled) {
+            Assets.gameMusic.play();
         }
-        Assets.gameMusic.play();
-        Assets.gameMusic.setLooping(true);
 
         paint = new Paint();
         paint.setTextSize(30);
@@ -77,7 +73,7 @@ public class GameScreen extends Screen {
         robot = new Robot();
         levelManager = new LevelManager(levelNumber);
 
-        currentSprite = Assets.bluebiplane;
+        currentSprite = bluebiplane;
 
         Random rand = new Random();
         //Generates a random int between 1 and 50
@@ -114,10 +110,8 @@ public class GameScreen extends Screen {
         if (robot.isCollision() || robot.isTooHigh() || robot.isBadLanding()) {
             if (crashTime == 0) {
                 crashTime = System.nanoTime();
-                currentSprite = Assets.explosion;
-                if (LoadSave.soundEnabled) {
-                    Assets.crash.play(volume);
-                }
+                currentSprite = explosion;
+                playSound(crash);
             }
             if (System.nanoTime() > (crashTime + 250000000)) {
                 if (LoadSave.hearts != 0) {
@@ -199,13 +193,7 @@ public class GameScreen extends Screen {
                     nullify();
                     goToMenu();
                 } else if (inBounds(event, pauseXPos, pauseYPos, 70, 71)){
-                    if(LoadSave.soundEnabled){
-                        LoadSave.soundEnabled=false;
-                        Assets.gameMusic.setVolume(0f);
-                    } else {
-                        LoadSave.soundEnabled=true;
-                        Assets.gameMusic.setVolume(volume);
-                    }
+                    LoadSave.soundEnabled = !LoadSave.soundEnabled;
                 }
             }
         }
@@ -308,20 +296,20 @@ public class GameScreen extends Screen {
             g.drawImage(HUD.getHearts(LoadSave.hearts), 0, 0);
             g.drawImage(HUD.getBirds(robot.getBirdsHit()), 0, 0);
             g.drawImage(HUD.getCheckpoints(levelManager.getCheckpoints()), 0, 0);
-            g.drawImage(Assets.pause, pauseXPos, pauseYPos);
+            g.drawImage(pause, pauseXPos, pauseYPos);
         }
     }
 
     private void drawPausedUI() {
         Graphics g = game.getGraphics();
         g.drawARGB(155, 0, 0, 0);
-        g.drawImage(Assets.resumeButton, pauseUIResumeXPos, pauseUIResumeYPos);
-        g.drawImage(Assets.restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
-        g.drawImage(Assets.menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
+        g.drawImage(resumeButton, pauseUIResumeXPos, pauseUIResumeYPos);
+        g.drawImage(restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
+        g.drawImage(menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
         if(LoadSave.soundEnabled){
-            g.drawImage(Assets.soundOnButton, pauseXPos, pauseYPos);
+            g.drawImage(soundOnButton, pauseXPos, pauseYPos);
         } else {
-         g.drawImage(Assets.soundOffButton, pauseXPos, pauseYPos);
+         g.drawImage(soundOffButton, pauseXPos, pauseYPos);
         }
     }
 
@@ -343,8 +331,8 @@ public class GameScreen extends Screen {
         } else if (robot.isBadLanding()) {
             g.drawString("Try landing a bit slower", 400, textYPos, paint);
         }
-        g.drawImage(Assets.restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
-        g.drawImage(Assets.menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
+        g.drawImage(restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
+        g.drawImage(menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
 
     }
 
@@ -353,25 +341,27 @@ public class GameScreen extends Screen {
         g.drawARGB(155, 0, 0, 0);
         g.drawString("Well done, you hit " + robot.getBirdsHit() + " birds", 400, 35, paint);
         if (LoadSave.getStars(levelManager.getLevel())==1) {
-            g.drawImage(Assets.one_star_complete, 275, pauseUIRestartYPos - 125);
+            g.drawImage(one_star_complete, 275, pauseUIRestartYPos - 125);
         } else if (LoadSave.getStars(levelManager.getLevel())==2) {
-            g.drawImage(Assets.two_stars_complete, 275, pauseUIRestartYPos - 125);
+            g.drawImage(two_stars_complete, 275, pauseUIRestartYPos - 125);
         } else if (LoadSave.getStars(levelManager.getLevel())==3) {
-            g.drawImage(Assets.three_stars_complete, 275, pauseUIRestartYPos - 125);
+            g.drawImage(three_stars_complete, 275, pauseUIRestartYPos - 125);
         }
-        g.drawImage(Assets.restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
-        g.drawImage(Assets.menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
+        g.drawImage(restartButton, pauseUIRestartXPos, pauseUIRestartYPos);
+        g.drawImage(menuButton, pauseUIMenuXPos, pauseUIMenuYPos);
     }
 
     @Override
     public void pause() {
         if (state == GameState.Running) state = GameState.Paused;
-            Assets.gameMusic.pause();
+        gameMusic.pause();
     }
 
     @Override
     public void resume() {
-        Assets.gameMusic.play();
+        if (LoadSave.soundEnabled) {
+            gameMusic.play();
+        }
         if (state == GameState.Paused) state = GameState.Running;
     }
 
@@ -387,7 +377,7 @@ public class GameScreen extends Screen {
 
     private void goToMenu() {
         LoadSave.save(game.getFileIO());
-        Assets.gameMusic.stop();
+        gameMusic.stop();
         game.setScreen(new MainMenuScreen(game));
     }
 

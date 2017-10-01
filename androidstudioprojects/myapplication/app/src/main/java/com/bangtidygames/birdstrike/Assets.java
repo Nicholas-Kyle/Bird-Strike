@@ -38,10 +38,19 @@ public class Assets {
             grass_12, grass_13, grass_14, grass_15, grass_16, grass_17, grass_18, grass_19, grass_20, grass_21, grass_22,
             grass_23, grass_24, grass_25, grass_26, grass_27;
     public static Sound crash, birdSound;
-    public static Music gameMusic;
+    public static Music menuMusic, gameMusic;
+
+
+    public static void playSound(Sound sound){
+        if (LoadSave.soundEnabled){
+            sound.play(1);
+        }
+    }
 
     public static void load(SampleGame sampleGame) {
-        // TODO Auto-generated method stub
+        menuMusic = sampleGame.getAudio().createMusic("Sounds/menuMusic.mp3");
+        menuMusic.setLooping(true);
+        menuMusic.setVolume(0.7f);
     }
 
 }

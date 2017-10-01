@@ -59,6 +59,10 @@ public class MainMenuScreen extends Screen {
         this.setMaxMenuX();
         this.setTotalStars();
         this.setX();
+
+        if (LoadSave.soundEnabled){
+            Assets.menuMusic.play();
+        }
     }
 
     public MainMenuScreen(Game game, int xPos) {
@@ -80,6 +84,10 @@ public class MainMenuScreen extends Screen {
         this.setTotalStars();
 
         this.x=xPos;
+
+        if (LoadSave.soundEnabled){
+            Assets.menuMusic.play();
+        }
     }
 
     @Override
@@ -121,8 +129,10 @@ public class MainMenuScreen extends Screen {
                     if (inBounds(event, soundButtonX, soundButtonY, 70, 71)){
                         if(LoadSave.soundEnabled){
                             LoadSave.soundEnabled=false;
+                            Assets.menuMusic.pause();
                         } else {
                             LoadSave.soundEnabled=true;
+                            Assets.menuMusic.play();
                         }
                     }
                 } else {
@@ -413,9 +423,7 @@ public class MainMenuScreen extends Screen {
     private void selectLevel(int level) {
         LoadSave.level = level;
         LoadSave.save(game.getFileIO());
-        Assets.crash = game.getAudio().createSound("SFX/explode.ogg");
-        Assets.birdSound = game.getAudio().createSound("SFX/bird.ogg");
-        Assets.gameMusic = game.getAudio().createMusic("gameMusic.ogg");
+        Assets.menuMusic.stop();
         game.setScreen(new GameScreen(game, level));
     }
 
@@ -465,6 +473,9 @@ public class MainMenuScreen extends Screen {
                 }
             }
         }
+        if (x > maxMenuX){
+            x = maxMenuX;
+        }
     }
 
     private void setTotalStars(){
@@ -477,12 +488,15 @@ public class MainMenuScreen extends Screen {
 
     @Override
     public void pause() {
-
+        Assets.menuMusic.pause();
+        LoadSave.save(game.getFileIO());
     }
 
     @Override
     public void resume() {
-
+        if(LoadSave.soundEnabled){
+            Assets.menuMusic.play();
+        }
     }
 
     @Override
@@ -492,7 +506,8 @@ public class MainMenuScreen extends Screen {
 
     @Override
     public void backButton() {
-        //TODO hide process?
+        Assets.menuMusic.stop();
+        LoadSave.save(game.getFileIO());
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 

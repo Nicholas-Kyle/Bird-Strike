@@ -124,7 +124,6 @@ public class LoadingScreen extends Screen {
         Assets.checkpoints_24 = g.newImage("HUD/checkpoints_24.png", ImageFormat.ARGB4444);
         Assets.checkpoints_25 = g.newImage("HUD/checkpoints_25.png", ImageFormat.ARGB4444);
 
-
         Assets.bluebiplane = g.newImage("bluebiplane.png", ImageFormat.ARGB4444);
         Assets.explosion = g.newImage("explosion.png", ImageFormat.ARGB4444);
 
@@ -173,6 +172,13 @@ public class LoadingScreen extends Screen {
         Assets.grass_25 = g.newImage("grassTileset/25.png", ImageFormat.ARGB4444);
         Assets.grass_26 = g.newImage("grassTileset/26.png", ImageFormat.ARGB4444);
         Assets.grass_27 = g.newImage("grassTileset/27.png", ImageFormat.ARGB4444);
+
+
+        Assets.crash = game.getAudio().createSound("Sounds/explode.ogg");
+        Assets.birdSound = game.getAudio().createSound("Sounds/bird.ogg");
+        Assets.gameMusic = game.getAudio().createMusic("Sounds/gameMusic.ogg");
+        Assets.gameMusic.setLooping(true);
+        Assets.gameMusic.setVolume(0.5f);
 
         LoadSave.load(game.getFileIO());
         //TODO remove next 2 lines, replace with check time elapsed in order to add hearts
