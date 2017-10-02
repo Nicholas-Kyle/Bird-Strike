@@ -176,7 +176,8 @@ public class GameScreen extends Screen {
 
     private void updatePaused(List touchEvents) {
         int len = touchEvents.size();
-        for (int i = 0; i < len; i++) {
+        int i = 0;
+        while (i < len && state == GameState.Paused) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
                 liftOnce = true;
@@ -197,6 +198,7 @@ public class GameScreen extends Screen {
                     LoadSave.soundEnabled = !LoadSave.soundEnabled;
                 }
             }
+            i++;
         }
     }
 
