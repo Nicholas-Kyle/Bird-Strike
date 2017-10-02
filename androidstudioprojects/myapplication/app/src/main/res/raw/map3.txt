@@ -2,20 +2,20 @@
 ! Map 3
 
 
-norn   qmnq   o mqrq  jonrn          ro
-8888888888888888888888888888i       4888
+        s       o n
+       488888888888i
 
-         jonr
-        48888i                   nq j
-88i                             48888888
+                            lm onrq
+                           48888888i
+      m qn
+     48888i
 
-           j        jonr
-       48888i      48888i
-
-                                np j
-       s         jom           je6663
-aaaaaae66663aaae6666663aaaaaae662gggfaaa
-! Number of Laps
-6
-! Robot start tile from top, char values
-e
+                     r  n
+k                   e666663
+63jq        jpn  qr 2gggggf q         oe
+66663aaae66666666661hggggg9d6663aae66666
+ggggf7772ggggggggggggggggggggggf772ggggg
+! Number of Checkpoints
+3
+! Robot start tile from top
+3
