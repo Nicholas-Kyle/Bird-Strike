@@ -123,8 +123,7 @@ public class Tile {
                 }
             }
         }
-        //set a line on the left hand side of blocks (that will be placed on the left)
-        // to cause a collision instead of bounce
+        //todo set a line on the left hand side of blocks (that will be placed on the left) to cause a collision instead of bounce
         if (type == 1 || type == 3 || type == 4 || type == 6 || type == 8 || type == 13 ||
                 type == 14 || type == 18) {
             r.set((int) tileX, tileY, (int) tileX + 32, tileY + 8);
@@ -221,10 +220,6 @@ public class Tile {
             }
         }
     }
-
-
-
-
 
     private void tileYAdjust(int y) {
         tileY -= (y - 32);

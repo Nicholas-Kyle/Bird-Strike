@@ -26,7 +26,7 @@ public class SampleGame extends AndroidGame {
     public static String map8;
     public static String map9;
     public static String map10;
-    //TODO add level maps
+    //TODO add level maps over 10
 
     boolean firstTimeCreate = true;
 
@@ -68,7 +68,7 @@ public class SampleGame extends AndroidGame {
         InputStream is10 = getResources().openRawResource(R.raw.map10);
         map10 = convertStreamToString(is10);
 
-        //TODO add level maps
+        //TODO add level maps over 10
 
         return new SplashLoadingScreen(this);
 

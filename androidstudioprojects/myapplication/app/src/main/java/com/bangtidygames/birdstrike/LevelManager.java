@@ -135,8 +135,11 @@ public class LevelManager {
                 for (int i = 0; i < width; i++) {
                     if (i < line.length()) {
                         char ch = line.charAt(i);
-                        Tile t = new Tile(i, j, Character.getNumericValue(ch), width);
-                        tileArray.add(t);
+                        int tileType = Character.getNumericValue(ch);
+                        if (tileType != -1){
+                            Tile t = new Tile(i, j, tileType, width);
+                            tileArray.add(t);
+                        }
                     }
                 }
         }
@@ -158,9 +161,8 @@ public class LevelManager {
             this.oneStar=0;
             this.twoStars=1;
             this.threeStars=3;
-        }
 
-        if (level == 2) {
+        } else if (level == 2) {
 
             Bird bird = new Bird(920, 200, (float)1.36);
             birdArray.add(bird);
@@ -180,6 +182,57 @@ public class LevelManager {
             this.oneStar=0;
             this.twoStars=3;
             this.threeStars=5;
+
+        } else if (level == 3) {
+
+            Bird bird = new Bird(920, 40, (float) 1.36);
+            birdArray.add(bird);
+
+            Bird bird2 = new Bird(1250, 300, (float) 1.36);
+            birdArray.add(bird2);
+
+            Bird bird3 = new Bird(1650, 210, (float) 1.36);
+            birdArray.add(bird3);
+
+            Bird bird4 = new Bird(2010, 160, (float) 1.36);
+            birdArray.add(bird4);
+
+            Bird bird5 = new Bird(2250, 240, (float) 1.36);
+            birdArray.add(bird5);
+
+            Bird bird6 = new Bird(2750, 30, (float) 1.36);
+            birdArray.add(bird6);
+
+            this.oneStar=0;
+            this.twoStars=4;
+            this.threeStars=6;
+
+        } else if (level == 4) {
+
+            Bird bird = new Bird(920, 40, (float)1.36);
+            birdArray.add(bird);
+
+            Bird bird2 = new Bird(1250, 300, (float)1.36);
+            birdArray.add(bird2);
+
+            Bird bird3 = new Bird(1650, 210, (float)1.36);
+            birdArray.add(bird3);
+
+            Bird bird4 = new Bird(2010, 160, (float)1.36);
+            birdArray.add(bird4);
+
+            Bird bird5 = new Bird(2250, 240, (float)1.36);
+            birdArray.add(bird5);
+
+            Bird bird6 = new Bird(2750, 30, (float)1.36);
+            birdArray.add(bird6);
+
+            Bird bird7 = new Bird(3350, 350, (float)1.36);
+            birdArray.add(bird7);
+
+            this.oneStar=0;
+            this.twoStars=4;
+            this.threeStars=7;
 
         } else if (level == 5) {
 
@@ -204,6 +257,30 @@ public class LevelManager {
             this.oneStar=0;
             this.twoStars=4;
             this.threeStars=6;
+
+        } else if (level == 6) {
+
+            Bird bird = new Bird(1250, 300, (float) 1.36);
+            birdArray.add(bird);
+
+            Bird bird2 = new Bird(1690, 140, (float) 1.36);
+            birdArray.add(bird2);
+
+            Bird bird3 = new Bird(1900, 5, (float) 1.36);
+            birdArray.add(bird3);
+
+            Bird bird4 = new Bird(2050, 200, (float) 1.36);
+            birdArray.add(bird4);
+
+            Bird bird5 = new Bird(2270, 250, (float) 1.36);
+            birdArray.add(bird5);
+
+            Bird bird6 = new Bird(3500, 350, (float) 1.36);
+            birdArray.add(bird6);
+
+            this.oneStar = 0;
+            this.twoStars = 4;
+            this.threeStars = 6;
 
         } else if (level == 10) {
 
@@ -267,10 +344,10 @@ public class LevelManager {
         }
     }
 
-    public void updateBirds(float deltaTime) {
+    public void updateBirds() {
         for (int i = 0; i < birdArray.size(); i++) {
             Bird bird = (Bird) birdArray.get(i);
-            bird.update(deltaTime);
+            bird.update();
         }
         birdAnim.update(10);
     }
@@ -306,10 +383,6 @@ public class LevelManager {
 
     public void checkpointPassed() {
         this.checkpoints--;
-        if (checkpoints == 1){
-            Assets.gameMusic.setVolume(.85f);
-            Assets.gameMusic.play();
-        }
         if (checkpoints == 0) {
             this.levelComplete = true;
         }

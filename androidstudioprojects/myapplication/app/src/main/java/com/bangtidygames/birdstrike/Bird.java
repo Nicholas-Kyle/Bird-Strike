@@ -35,7 +35,7 @@ public class Bird {
         this.loadImages();
     }
 
-    public void update(float deltaTime){
+    public void update(){
         Robot robot = GameScreen.getRobot();
         float robotX = robot.getAbsoluteX();
         if((xPos-600)<robotX) {

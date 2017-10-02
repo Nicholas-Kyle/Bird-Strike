@@ -33,7 +33,7 @@ public class LoadingScreen extends Screen {
         Assets.level_8 = g.newImage("MenuLevels/lvl8.png", ImageFormat.ARGB4444);
         Assets.level_9 = g.newImage("MenuLevels/lvl9.png", ImageFormat.ARGB4444);
         Assets.level_10 = g.newImage("MenuLevels/lvl10.png", ImageFormat.ARGB4444);
-        //TODO add levels
+        //TODO add levels over 10
 
         Assets.one_star_menu = g.newImage("MenuLevels/oneStarMenu.png", ImageFormat.ARGB4444);
         Assets.two_stars_menu = g.newImage("MenuLevels/twoStarsMenu.png", ImageFormat.ARGB4444);
@@ -52,8 +52,6 @@ public class LoadingScreen extends Screen {
         Assets.restartButton = g.newImage("restartButton.png", ImageFormat.ARGB4444);
 
         Assets.BG_forest_1280 = g.newImage("grassTileset/BG_forest_1280.png", ImageFormat.RGB565);
-
-        Assets.UI = g.newImage("RunningUI.png", ImageFormat.RGB565);
 
         Assets.hearts_1 = g.newImage("HUD/heart_1.png", ImageFormat.ARGB4444);
         Assets.hearts_2 = g.newImage("HUD/heart_2.png", ImageFormat.ARGB4444);
@@ -75,6 +73,7 @@ public class LoadingScreen extends Screen {
         Assets.hearts_18 = g.newImage("HUD/heart_18.png", ImageFormat.ARGB4444);
         Assets.hearts_19 = g.newImage("HUD/heart_19.png", ImageFormat.ARGB4444);
         Assets.hearts_20 = g.newImage("HUD/heart_20.png", ImageFormat.ARGB4444);
+        Assets.hearts_infinity = g.newImage("HUD/heart_infinity.png", ImageFormat.ARGB4444);
 
         Assets.birds_0 = g.newImage("HUD/bird_0.png", ImageFormat.ARGB4444);
         Assets.birds_1 = g.newImage("HUD/bird_1.png", ImageFormat.ARGB4444);
@@ -176,15 +175,11 @@ public class LoadingScreen extends Screen {
 
         Assets.crash = game.getAudio().createSound("Sounds/explode.ogg");
         Assets.birdSound = game.getAudio().createSound("Sounds/bird.ogg");
-        Assets.gameMusic = game.getAudio().createMusic("Sounds/gameMusic.ogg");
+        Assets.gameMusic = game.getAudio().createMusic("Sounds/gameMusic.mp3");
         Assets.gameMusic.setLooping(true);
         Assets.gameMusic.setVolume(0.5f);
 
         LoadSave.load(game.getFileIO());
-        //TODO remove next 2 lines, replace with check time elapsed in order to add hearts
-        if (LoadSave.hearts<1){
-            LoadSave.hearts=20;
-        }
         game.setScreen(new MainMenuScreen(game));
     }
 

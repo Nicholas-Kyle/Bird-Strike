@@ -50,6 +50,8 @@ public class HUD {
             h = Assets.hearts_19;
         } else if (anInt == 20){
             h = Assets.hearts_20;
+        } else if (anInt == 21){
+            h = Assets.hearts_infinity;
         }
         return h;
     }

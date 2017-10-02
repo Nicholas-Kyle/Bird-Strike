@@ -35,8 +35,10 @@ public class SettingsScreen extends Screen {
 
             if (event.type == TouchEvent.TOUCH_UP && liftOnce == true) {
                 if (inBounds(event, 50, 50, 70, 71)) {
-                    //TODO
-                }
+                    //TODO return to menu
+                }// else if (inBounds(event, )){
+                    //todo
+                //}
             }
         }
     }
@@ -54,6 +56,7 @@ public class SettingsScreen extends Screen {
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
         g.drawImage(Assets.menu_forest, -(xPos % 640), 0);
+        //todo draw return to menu button
     }
 
     @Override

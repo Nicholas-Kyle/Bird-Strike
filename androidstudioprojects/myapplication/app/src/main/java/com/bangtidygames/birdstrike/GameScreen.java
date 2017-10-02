@@ -114,7 +114,7 @@ public class GameScreen extends Screen {
                 playSound(crash);
             }
             if (System.nanoTime() > (crashTime + 250000000)) {
-                if (LoadSave.hearts != 0) {
+                if (LoadSave.hearts != 0 && LoadSave.hearts != 21) {
                     LoadSave.hearts--;
                 }
                 LoadSave.save(game.getFileIO());
@@ -141,7 +141,7 @@ public class GameScreen extends Screen {
 
             robot.update(deltaTime);
             levelManager.updateTiles();
-            levelManager.updateBirds(deltaTime);
+            levelManager.updateBirds();
             levelManager.updateBackground();
             if (levelManager.isLevelComplete()) {
                 if (LoadSave.getStars(levelManager.getLevel()) == 2) {
@@ -180,7 +180,8 @@ public class GameScreen extends Screen {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
                 liftOnce = true;
-            } if (event.type == TouchEvent.TOUCH_DOWN && liftOnce) {
+            }
+            if (event.type == TouchEvent.TOUCH_DOWN && liftOnce) {
                 if (inBounds(event, pauseUIResumeXPos, pauseUIResumeYPos, buttonWidth,
                         buttonHeight)) {
                     resume();
@@ -192,7 +193,7 @@ public class GameScreen extends Screen {
                         buttonHeight)) {
                     nullify();
                     goToMenu();
-                } else if (inBounds(event, pauseXPos, pauseYPos, 70, 71)){
+                } else if (inBounds(event, pauseXPos, pauseYPos, 70, 71)) {
                     LoadSave.soundEnabled = !LoadSave.soundEnabled;
                 }
             }
@@ -309,7 +310,7 @@ public class GameScreen extends Screen {
         if(LoadSave.soundEnabled){
             g.drawImage(soundOnButton, pauseXPos, pauseYPos);
         } else {
-         g.drawImage(soundOffButton, pauseXPos, pauseYPos);
+            g.drawImage(soundOffButton, pauseXPos, pauseYPos);
         }
     }
 

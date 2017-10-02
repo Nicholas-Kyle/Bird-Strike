@@ -250,7 +250,7 @@ public class MainMenuScreen extends Screen {
                     }
                     g.drawImage(image, level.getX() - menuPos, level.getY());
                 }
-                //TODO add levels
+                //TODO add levels over 10
                 if (LoadSave.stars[level.getLevelNumber() - 1] == 1) {
                     g.drawImage(Assets.one_star_menu, level.getX() - menuPos, level.getY());
                 } else if (LoadSave.stars[level.getLevelNumber() - 1] == 2) {

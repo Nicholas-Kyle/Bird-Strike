@@ -16,8 +16,8 @@ import java.util.StringTokenizer;
 public class LoadSave {
     public static boolean soundEnabled = true;
     public static int level = 0;
-    public static int[] stars = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};// TODO update when more levels are added
-    public static int hearts = 20;
+    public static int[] stars = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};// TODO update if more than 10 levels
+    public static int hearts = 21;
 
     public static void load(FileIO files) {
         BufferedReader in = null;
