@@ -123,7 +123,8 @@ public class GameScreen extends Screen {
         } else {
 
             int len = touchEvents.size();
-            for (int i = 0; i < len; i++) {
+            int i = 0;
+            while (i < len && len == touchEvents.size()) {
                 TouchEvent event = (TouchEvent) touchEvents.get(i);
                 if (event.type == TouchEvent.TOUCH_DOWN) {
                     if (inBounds(event, pauseXPos, pauseYPos, 70, 70)) {
@@ -137,6 +138,7 @@ public class GameScreen extends Screen {
                 if (event.type == TouchEvent.TOUCH_UP) {
                     robot.stopUp();
                 }
+                i++;
             }
 
             robot.update(deltaTime);
@@ -177,7 +179,7 @@ public class GameScreen extends Screen {
     private void updatePaused(List touchEvents) {
         int len = touchEvents.size();
         int i = 0;
-        while (i < len && state == GameState.Paused) {
+        while (i < len && len == touchEvents.size()) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
                 liftOnce = true;
@@ -204,7 +206,8 @@ public class GameScreen extends Screen {
 
     private void updateGameOver(List touchEvents) {
         int len = touchEvents.size();
-        for (int i = 0; i < len; i++) {
+        int i = 0;
+        while (i < len && len == touchEvents.size()){
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_DOWN) {
                 liftOnce = true;
@@ -220,12 +223,14 @@ public class GameScreen extends Screen {
                     goToMenu();
                 }
             }
+            i++;
         }
     }
 
     private void updateComplete(List touchEvents) {
         int len = touchEvents.size();
-        for (int i = 0; i < len; i++) {
+        int i = 0;
+        while (i < len && len == touchEvents.size()){
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_DOWN) {
                 liftOnce = true;
@@ -241,6 +246,7 @@ public class GameScreen extends Screen {
                     goToMenu();
                 }
             }
+            i++;
         }
     }
 
@@ -342,7 +348,11 @@ public class GameScreen extends Screen {
     private void drawCompleteUI() {
         Graphics g = game.getGraphics();
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Well done, you hit " + robot.getBirdsHit() + " birds", 400, 35, paint);
+        if (levelManager.getThreeStars() == robot.getBirdsHit()) {
+            g.drawString("Well done, you hit all " + robot.getBirdsHit() + " birds", 400, 35, paint);
+        } else {
+            g.drawString("Well done, you hit " + robot.getBirdsHit() + " birds", 400, 35, paint);
+        }
         if (LoadSave.getStars(levelManager.getLevel())==1) {
             g.drawImage(one_star_complete, 275, pauseUIRestartYPos - 125);
         } else if (LoadSave.getStars(levelManager.getLevel())==2) {

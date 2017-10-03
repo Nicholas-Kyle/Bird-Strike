@@ -94,7 +94,8 @@ public class MainMenuScreen extends Screen {
     public void update(float deltaTime) {
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         int len = touchEvents.size();
-        for (int i = 0; i < len; i++) {
+        int i = 0;
+        while (i < len && len == touchEvents.size()) {
             TouchEvent event = touchEvents.get(i);
 
             if (event.type == TouchEvent.TOUCH_DRAGGED) {
@@ -147,6 +148,7 @@ public class MainMenuScreen extends Screen {
                     dragging = false;
                 }
             }
+            i++;
         }
     }
 
