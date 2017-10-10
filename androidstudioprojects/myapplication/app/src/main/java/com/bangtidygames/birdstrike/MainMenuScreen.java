@@ -20,7 +20,6 @@ import com.bangtidygames.framework.Input.TouchEvent;
 public class MainMenuScreen extends Screen {
 
     private boolean dragging = false;
-    private boolean liftOnce = false;
 
     private boolean insufficientStars = false;
     private float insufficientStarsTime;
@@ -106,46 +105,41 @@ public class MainMenuScreen extends Screen {
                     currentDrag = drag-event.x;
                 }
             }
-            if (event.type == TouchEvent.TOUCH_DOWN) {
-                liftOnce = true;
-            }
 
-            if (event.type == TouchEvent.TOUCH_UP) {
-                if (dragging == false && liftOnce == true) {
-                    for (MenuLevelPosition level : LevelPositions) {
-                        if (inBounds(event, level.getX() - x, level.getY(), 119, 150)) {
-                            if (totalStars >= level.getStarsToUnlock()) {
-                                if (LoadSave.hearts != 0) {
-                                    selectLevel(level.getLevelNumber());
-                                } else {
-                                    //TODO add you must wait x amount of time for hearts to reload
-                                }
+            if (event.type == TouchEvent.TOUCH_DOWN) {
+                x += currentDrag;
+                currentDrag = 0;
+                if (x < 0){
+                    x = 0;
+                }
+                if (x > maxMenuX){
+                    x = maxMenuX;
+                }
+                dragging = false;
+
+                for (MenuLevelPosition level : LevelPositions) {
+                    if (inBounds(event, level.getX() - x, level.getY(), 119, 150)) {
+                        if (totalStars >= level.getStarsToUnlock()) {
+                            if (LoadSave.hearts != 0) {
+                                selectLevel(level.getLevelNumber());
                             } else {
-                                insufficientStarsTime = System.nanoTime();
-                                insufficientStarsLevel = level.getLevelNumber();
-                                insufficientStars = true;
+                                //TODO add you must wait x amount of time for hearts to reload
                             }
-                        }
-                    }
-                    if (inBounds(event, soundButtonX, soundButtonY, 70, 71)){
-                        if(LoadSave.soundEnabled){
-                            LoadSave.soundEnabled=false;
-                            Assets.menuMusic.pause();
                         } else {
-                            LoadSave.soundEnabled=true;
-                            Assets.menuMusic.play();
+                            insufficientStarsTime = System.nanoTime();
+                            insufficientStarsLevel = level.getLevelNumber();
+                            insufficientStars = true;
                         }
                     }
-                } else {
-                    x += currentDrag;
-                    currentDrag = 0;
-                    if (x < 0){
-                        x = 0;
+                }
+                if (inBounds(event, soundButtonX, soundButtonY, 70, 71)){
+                    if(LoadSave.soundEnabled){
+                        LoadSave.soundEnabled=false;
+                        Assets.menuMusic.pause();
+                    } else {
+                        LoadSave.soundEnabled=true;
+                        Assets.menuMusic.play();
                     }
-                    if (x > maxMenuX){
-                        x = maxMenuX;
-                    }
-                    dragging = false;
                 }
             }
             i++;
@@ -154,7 +148,8 @@ public class MainMenuScreen extends Screen {
 
     private boolean inBounds(TouchEvent event, int x, int y, int width,
                              int height) {
-        if (event.x > x && event.x < x + width - 1 && event.y > y
+        double navAdjustX = x * 1.09;
+        if (event.x > navAdjustX && event.x < navAdjustX + width - 1 && event.y > y
                 && event.y < y + height - 1)
             return true;
         else
@@ -350,7 +345,23 @@ public class MainMenuScreen extends Screen {
             g.drawImage(Assets.menu_forest, (2560 - maxMenuX), 0);
             g.drawImage(Assets.menu_forest, (3840 - maxMenuX), 0);
             for (MenuLevelPosition level : LevelPositions) {
-                if (level.getLevelNumber() == 7) {
+                if (level.getLevelNumber() == 5) {
+                    Image image;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_5;
+                    } else {
+                        image = Assets.level_locked;
+                    }
+                    g.drawImage(image, level.getX() - maxMenuX, level.getY());
+                } else if (level.getLevelNumber() == 6) {
+                    Image image;
+                    if (totalStars >= level.getStarsToUnlock()) {
+                        image = Assets.level_6;
+                    } else {
+                        image = Assets.level_locked;
+                    }
+                    g.drawImage(image, level.getX() - maxMenuX, level.getY());
+                } else if (level.getLevelNumber() == 7) {
                     Image image;
                     if (totalStars >= level.getStarsToUnlock()) {
                         image = Assets.level_7;
@@ -383,6 +394,7 @@ public class MainMenuScreen extends Screen {
                     }
                     g.drawImage(image, level.getX() - maxMenuX, level.getY());
                 }
+                //todo levels over 10
                 if (LoadSave.stars[level.getLevelNumber() - 1] == 1) {
                     g.drawImage(Assets.one_star_menu, level.getX() - maxMenuX, level.getY());
                 } else if (LoadSave.stars[level.getLevelNumber() - 1] == 2) {
@@ -446,14 +458,17 @@ public class MainMenuScreen extends Screen {
         LevelPositions.add(level5);
         MenuLevelPosition level6 = new MenuLevelPosition((x+gapX*5), (y+gapY), 6, 8);
         LevelPositions.add(level6);
-        MenuLevelPosition level7 = new MenuLevelPosition((x+gapX*6), y, 7, 11);
+        MenuLevelPosition level7 = new MenuLevelPosition((x+gapX*6), y, 7, 10);
         LevelPositions.add(level7);
-        MenuLevelPosition level8 = new MenuLevelPosition((x+gapX*7), (y+gapY), 8, 11);
+        MenuLevelPosition level8 = new MenuLevelPosition((x+gapX*7), (y+gapY), 8, 12);
         LevelPositions.add(level8);
-        MenuLevelPosition level9 = new MenuLevelPosition((x+gapX*8), y, 9, 14);
-        LevelPositions.add(level9);
-        MenuLevelPosition level10 = new MenuLevelPosition((x+gapX*9), (y+gapY), 10, 15);
-        LevelPositions.add(level10);
+        /**
+         MenuLevelPosition level9 = new MenuLevelPosition((x+gapX*8), y, 9, 14);
+         LevelPositions.add(level9);
+         MenuLevelPosition level10 = new MenuLevelPosition((x+gapX*9), (y+gapY), 10, 15);
+         LevelPositions.add(level10);
+         */
+        //todo levels over 10
     }
 
     private void setMaxMenuX(){
@@ -467,8 +482,8 @@ public class MainMenuScreen extends Screen {
     }
 
     private void setX(){
-        int l = LoadSave.level-1;
-        if (l >= 2){
+        int l = LoadSave.level;
+        if (l >= 3){
             for (MenuLevelPosition level : LevelPositions) {
                 if (level.levelNumber == l){
                     x = level.getX()-50;
